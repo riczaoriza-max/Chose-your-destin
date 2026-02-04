@@ -3,7 +3,7 @@
 **Author:** riczan  
 **License:** ARR (All Rights Reserved)  
 **Version:** v1  
-**Target compatibility:** Minecraft 1.20.1 (Forge)
+**Target compatibility:** Minecraft 1.20.1 (Fabric)
 
 ## Overview
 
@@ -19,10 +19,10 @@ This mod creates a system of temporary choices that directly affect gameplay. Ea
 
 ## Architecture
 
-This repository provides a Forge project with shared logic in `common` and a Forge entrypoint in `forge`.
+This repository provides a Fabric project with shared logic in `common` and a Fabric entrypoint in `fabric`.
 
 - `src/common/java/...`: shared logic (choices, timer, boss bar, effects).
-- `src/forge/java/...`: Forge entrypoint to register events and load shared logic.
+- `src/fabric/java/...`: Fabric entrypoint to register events and load shared logic.
 - `config/choices.json`: data file with prompts and options (100+).
 - `ChoiceConfigLoader`: Gson-based data loading (available in the Minecraft runtime).
 
@@ -37,4 +37,4 @@ This repository provides a Forge project with shared logic in `common` and a For
 
 ## Notes
 
-This project ships the full runtime hooks, UI, effect mapping, and Forge build setup.
+This project ships the full runtime hooks, UI, effect mapping, and Fabric build setup.

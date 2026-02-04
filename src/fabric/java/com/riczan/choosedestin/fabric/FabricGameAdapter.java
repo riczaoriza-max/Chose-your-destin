@@ -1,4 +1,4 @@
-package com.riczan.choosedestin.forge;
+package com.riczan.choosedestin.fabric;
 
 import com.riczan.choosedestin.Choice;
 import com.riczan.choosedestin.ChoiceEffect;
@@ -11,7 +11,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerPlayer;
@@ -22,7 +25,9 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public final class ForgeGameAdapter implements GameAdapter {
+public final class FabricGameAdapter implements GameAdapter {
+    static final ResourceLocation OPEN_CHOICE_PACKET = new ResourceLocation("choose_your_destin", "open_choice");
+
     private static final int EFFECT_DURATION_TICKS = 20 * 60 * 5;
     private static final UUID DAMAGE_MODIFIER_ID = UUID.fromString("e44a7d2b-5f9b-4d45-97f7-8f584fc35c21");
     private static final UUID ATTACK_SPEED_MODIFIER_ID = UUID.fromString("7c6d72cf-e76a-4c9a-9a0b-920724d1d5d5");
@@ -33,7 +38,7 @@ public final class ForgeGameAdapter implements GameAdapter {
     private final Map<UUID, ServerBossEvent> bossBars = new HashMap<>();
     private final Map<UUID, EnumSet<ChoiceEffect>> activeEffects = new HashMap<>();
 
-    public ForgeGameAdapter(MinecraftServer server) {
+    public FabricGameAdapter(MinecraftServer server) {
         this.server = Objects.requireNonNull(server, "server");
     }
 
@@ -41,7 +46,7 @@ public final class ForgeGameAdapter implements GameAdapter {
     public List<GamePlayer> getOnlinePlayers() {
         List<GamePlayer> players = new ArrayList<>();
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
-            players.add(new ForgeGamePlayer(player));
+            players.add(new FabricGamePlayer(player));
         }
         return players;
     }
@@ -113,7 +118,11 @@ public final class ForgeGameAdapter implements GameAdapter {
         if (handle == null) {
             return;
         }
-        ForgeNetworking.sendOpenChoice(handle, choice);
+        FriendlyByteBuf buf = new FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
+        buf.writeUtf(choice.getPrompt());
+        buf.writeInt(choice.getOptions().size());
+        choice.getOptions().forEach(option -> buf.writeUtf(option.getLabel()));
+        ServerPlayNetworking.send(handle, OPEN_CHOICE_PACKET, buf);
     }
 
     @Override
@@ -125,8 +134,8 @@ public final class ForgeGameAdapter implements GameAdapter {
     }
 
     private ServerPlayer unwrap(GamePlayer player) {
-        if (player instanceof ForgeGamePlayer forgePlayer) {
-            return forgePlayer.getHandle();
+        if (player instanceof FabricGamePlayer fabricPlayer) {
+            return fabricPlayer.getHandle();
         }
         return null;
     }

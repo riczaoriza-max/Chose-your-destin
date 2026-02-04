@@ -1,13 +1,13 @@
-package com.riczan.choosedestin.forge;
+package com.riczan.choosedestin.fabric;
 
 import com.riczan.choosedestin.GamePlayer;
 import java.util.UUID;
 import net.minecraft.server.level.ServerPlayer;
 
-public final class ForgeGamePlayer implements GamePlayer {
+public final class FabricGamePlayer implements GamePlayer {
     private final ServerPlayer player;
 
-    public ForgeGamePlayer(ServerPlayer player) {
+    public FabricGamePlayer(ServerPlayer player) {
         this.player = player;
     }
 

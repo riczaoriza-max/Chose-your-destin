@@ -1,16 +1,18 @@
-package com.riczan.choosedestin.forge;
+package com.riczan.choosedestin.fabric;
 
 import java.util.List;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 
-public final class ForgeChoiceScreen extends Screen {
+public final class FabricChoiceScreen extends Screen {
     private final String prompt;
     private final List<String> options;
 
-    public ForgeChoiceScreen(String prompt, List<String> options) {
+    public FabricChoiceScreen(String prompt, List<String> options) {
         super(Component.literal("Choice"));
         this.prompt = prompt;
         this.options = options;
@@ -38,7 +40,9 @@ public final class ForgeChoiceScreen extends Screen {
     }
 
     private void sendSelection(int index) {
-        ForgeNetworking.CHANNEL.sendToServer(new ForgeNetworking.SelectChoicePacket(index));
+        FriendlyByteBuf buf = new FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
+        buf.writeInt(index);
+        ClientPlayNetworking.send(ChooseYourDestinFabric.SELECT_CHOICE_PACKET, buf);
         Minecraft.getInstance().setScreen(null);
     }
 }
