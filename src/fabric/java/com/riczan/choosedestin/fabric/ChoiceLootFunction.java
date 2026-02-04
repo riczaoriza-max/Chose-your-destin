@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.riczan.choosedestin.ChoiceEffect;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.condition.LootCondition;
 import net.minecraft.loot.context.LootContext;
@@ -58,9 +59,9 @@ public final class ChoiceLootFunction extends ConditionalLootFunction {
     }
 
     private static ServerPlayerEntity findPlayer(LootContext context) {
-        ServerPlayerEntity player = context.get(LootContextParameters.LAST_DAMAGE_PLAYER);
-        if (player != null) {
-            return player;
+        PlayerEntity lastDamagePlayer = context.get(LootContextParameters.LAST_DAMAGE_PLAYER);
+        if (lastDamagePlayer instanceof ServerPlayerEntity serverPlayer) {
+            return serverPlayer;
         }
         Entity killer = context.get(LootContextParameters.KILLER_ENTITY);
         if (killer instanceof ServerPlayerEntity killerPlayer) {
