@@ -10,10 +10,9 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.entity.event.v1.LivingEntityDamageEvents;
-import net.fabricmc.fabric.api.entity.event.v1.LivingEntityDropEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.event.player.BlockDropItemsCallback;
+import net.fabricmc.fabric.api.entity.event.v1.LivingEntityDropItemsCallback;
+import net.fabricmc.fabric.api.event.player.BlockDropItemCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -27,6 +26,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
 
     private static ChoiceRuntime runtime;
     private static FabricGameAdapter adapter;
+    private static final ThreadLocal<Boolean> DAMAGE_REENTRY = ThreadLocal.withInitial(() -> false);
 
     @Override
     public void onInitialize() {
@@ -57,18 +57,26 @@ public final class ChooseYourDestinFabric implements ModInitializer {
             });
         });
 
-        LivingEntityDamageEvents.MODIFY_DAMAGE.register((entity, source, amount) -> {
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             if (adapter == null || !(entity instanceof ServerPlayerEntity player)) {
-                return amount;
+                return true;
+            }
+            if (Boolean.TRUE.equals(DAMAGE_REENTRY.get())) {
+                return true;
             }
             if ("fall".equals(source.getName())) {
                 double multiplier = adapter.getMultiplier(player, ChoiceEffect.FALL_DAMAGE_MULTIPLIER_2X, 1.0);
-                return (float) (amount * multiplier);
+                if (Double.compare(multiplier, 1.0) != 0) {
+                    DAMAGE_REENTRY.set(true);
+                    entity.damage(source, (float) (amount * multiplier));
+                    DAMAGE_REENTRY.set(false);
+                    return false;
+                }
             }
-            return amount;
+            return true;
         });
 
-        BlockDropItemsCallback.EVENT.register((world, player, pos, state, blockEntity, tool, drops) -> {
+        BlockDropItemCallback.EVENT.register((world, player, pos, state, blockEntity, tool, drops) -> {
             if (adapter == null || !(player instanceof ServerPlayerEntity serverPlayer)) {
                 return;
             }
@@ -78,7 +86,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
             }
         });
 
-        LivingEntityDropEvents.MODIFY.register((entity, source, drops, recentlyHit) -> {
+        LivingEntityDropItemsCallback.EVENT.register((entity, source, drops, recentlyHit) -> {
             if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player)) {
                 return;
             }
