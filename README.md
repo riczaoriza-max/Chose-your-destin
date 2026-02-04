@@ -3,7 +3,7 @@
 **Author:** riczan  
 **License:** ARR (All Rights Reserved)  
 **Version:** v1  
-**Target compatibility:** Minecraft 1.20.1 (Forge, Fabric, NeoForge, and Quilt)
+**Target compatibility:** Minecraft 1.20.1 (Forge)
 
 ## Overview
 
@@ -17,12 +17,12 @@ This mod creates a system of temporary choices that directly affect gameplay. Ea
 - When the timer ends, the effect expires and **a new choice** is presented.
 - Choices are **mutually exclusive** per event (one active option at a time).
 
-## Multiloader architecture
+## Architecture
 
-This repository provides a multiloader project with shared logic in `common` and loader-specific entrypoints for `fabric`, `forge`, `neoforge`, and `quilt`.
+This repository provides a Forge project with shared logic in `common` and a Forge entrypoint in `forge`.
 
 - `src/common/java/...`: shared logic (choices, timer, boss bar, effects).
-- `src/*/java/...`: entrypoints per loader to register events and load shared logic.
+- `src/forge/java/...`: Forge entrypoint to register events and load shared logic.
 - `config/choices.json`: data file with prompts and options (100+).
 - `ChoiceConfigLoader`: Gson-based data loading (available in the Minecraft runtime).
 
@@ -37,4 +37,4 @@ This repository provides a multiloader project with shared logic in `common` and
 
 ## Notes
 
-This project ships the full runtime hooks, UI, effect mapping, and multiloader build setup.
+This project ships the full runtime hooks, UI, effect mapping, and Forge build setup.
