@@ -18,7 +18,6 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.entity.LivingEntity;
 
 public final class ChooseYourDestinFabric implements ModInitializer {
     public static final Identifier SELECT_CHOICE_PACKET = new Identifier("choose_your_destin", "select_choice");
