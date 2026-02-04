@@ -66,7 +66,7 @@ public final class FabricGameAdapter implements GameAdapter {
             BossBar.Style.PROGRESS
         ));
         bossBar.setName(Text.literal(title));
-        bossBar.setProgress(progress);
+        bossBar.setPercent(progress);
         if (!bossBar.getPlayers().contains(handle)) {
             bossBar.addPlayer(handle);
         }
@@ -112,7 +112,7 @@ public final class FabricGameAdapter implements GameAdapter {
 
     @Override
     public long getGameTimeSeconds() {
-        return server.getTickCount() / 20L;
+        return server.getOverworld().getTime() / 20L;
     }
 
     @Override

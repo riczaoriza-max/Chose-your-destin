@@ -90,15 +90,15 @@ public final class ChooseYourDestinFabric implements ModInitializer {
         });
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player) || !(entity instanceof LivingEntity livingEntity)) {
+            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player)) {
                 return;
             }
             double multiplier = adapter.getMultiplier(player, ChoiceEffect.XP_MULTIPLIER_0_8X, 1.0);
             if (multiplier < 1.0) {
-                int baseXp = livingEntity.getXpToDrop();
+                int baseXp = entity.getXpToDrop();
                 int reduction = (int) Math.floor(baseXp * (1.0 - multiplier));
                 if (reduction > 0) {
-                    player.giveExperiencePoints(-reduction);
+                    player.addExperience(-reduction);
                 }
             }
         });
