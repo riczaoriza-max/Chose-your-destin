@@ -3,7 +3,7 @@ package com.riczan.choosedestin.fabric;
 import java.util.List;
 import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.network.PacketByteBuf;
@@ -44,6 +44,6 @@ public final class FabricChoiceScreen extends Screen {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(index);
         ClientPlayNetworking.send(ChooseYourDestinFabric.SELECT_CHOICE_PACKET, buf);
-        Minecraft.getInstance().setScreen(null);
+        MinecraftClient.getInstance().setScreen(null);
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.MinecraftClient;
 
 public final class ChooseYourDestinFabricClient implements ClientModInitializer {
     @Override
@@ -16,7 +16,7 @@ public final class ChooseYourDestinFabricClient implements ClientModInitializer 
             for (int i = 0; i < optionCount; i++) {
                 options.add(buf.readString());
             }
-            client.execute(() -> Minecraft.getInstance().setScreen(new FabricChoiceScreen(prompt, options)));
+            client.execute(() -> MinecraftClient.getInstance().setScreen(new FabricChoiceScreen(prompt, options)));
         });
     }
 }
