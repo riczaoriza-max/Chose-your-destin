@@ -1,0 +1,19 @@
+allprojects {
+    group = 'com.riczan.choosedestin'
+    version = '1.0.0'
+
+    repositories {
+        mavenCentral()
+        maven { url = 'https://maven.fabricmc.net/' }
+        maven { url = 'https://maven.minecraftforge.net/' }
+        maven { url = 'https://maven.neoforged.net/releases/' }
+        maven { url = 'https://maven.quiltmc.org/repository/release/' }
+    }
+}
+
+subprojects {
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = 'UTF-8'
+        options.release.set(17)
+    }
+}

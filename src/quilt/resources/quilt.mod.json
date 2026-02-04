@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "com.riczan.choosedestin",
+    "id": "choose_your_destin",
+    "version": "${version}",
+    "metadata": {
+      "name": "Choose Your Destin",
+      "description": "Timed gameplay choices with a menu and boss bar.",
+      "contributors": {
+        "riczan": "Author"
+      },
+      "license": "ARR"
+    },
+    "entrypoints": {
+      "init": [
+        "com.riczan.choosedestin.quilt.ChooseYourDestinQuilt"
+      ],
+      "client_init": [
+        "com.riczan.choosedestin.quilt.ChooseYourDestinQuiltClient"
+      ]
+    },
+    "depends": [
+      {
+        "id": "minecraft",
+        "version": "1.20.1"
+      }
+    ]
+  },
+  "minecraft": {
+    "environment": "*"
+  }
+}

@@ -1,0 +1,17 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="ARR"
+
+[[mods]]
+modId="choose_your_destin"
+version="${version}"
+displayName="Choose Your Destin"
+authors="riczan"
+description="Timed gameplay choices with a menu and boss bar."
+
+[[dependencies.choose_your_destin]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
