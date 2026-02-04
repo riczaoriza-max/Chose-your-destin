@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "choose_your_destin",
+  "version": "${version}",
+  "name": "Choose Your Destin",
+  "description": "Timed gameplay choices with a menu and boss bar.",
+  "authors": ["riczan"],
+  "license": "ARR",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.riczan.choosedestin.fabric.ChooseYourDestinFabric"
+    ],
+    "client": [
+      "com.riczan.choosedestin.fabric.ChooseYourDestinFabricClient"
+    ]
+  },
+  "depends": {
+    "minecraft": "1.20.1",
+    "fabricloader": ">=0.15.11",
+    "fabric-api": "*"
+  }
+}

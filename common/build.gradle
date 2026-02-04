@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+}
+
+dependencies {
+    compileOnly 'com.google.code.gson:gson:2.10.1'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir '../src/common/java'
+        }
+        resources {
+            srcDir '../src/common/resources'
+        }
+    }
+}
