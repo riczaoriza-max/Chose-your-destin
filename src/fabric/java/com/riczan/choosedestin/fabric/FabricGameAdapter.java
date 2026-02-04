@@ -11,22 +11,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeInstance;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.entity.attribute.EntityAttributeModifier.Operation;
+import net.minecraft.entity.attribute.EntityAttributes;
+import net.minecraft.entity.boss.BossBar;
+import net.minecraft.entity.boss.ServerBossBar;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerBossEvent;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.ai.attributes.AttributeInstance;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
-import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.Text;
+import net.minecraft.util.Identifier;
 
 public final class FabricGameAdapter implements GameAdapter {
-    static final ResourceLocation OPEN_CHOICE_PACKET = new ResourceLocation("choose_your_destin", "open_choice");
+    static final Identifier OPEN_CHOICE_PACKET = new Identifier("choose_your_destin", "open_choice");
 
     private static final int EFFECT_DURATION_TICKS = 20 * 60 * 5;
     private static final UUID DAMAGE_MODIFIER_ID = UUID.fromString("e44a7d2b-5f9b-4d45-97f7-8f584fc35c21");
@@ -35,7 +38,7 @@ public final class FabricGameAdapter implements GameAdapter {
     private static final UUID KNOCKBACK_MODIFIER_ID = UUID.fromString("b6f8102e-ec1e-451a-b89b-81ac2d0f5198");
 
     private final MinecraftServer server;
-    private final Map<UUID, ServerBossEvent> bossBars = new HashMap<>();
+    private final Map<UUID, ServerBossBar> bossBars = new HashMap<>();
     private final Map<UUID, EnumSet<ChoiceEffect>> activeEffects = new HashMap<>();
 
     public FabricGameAdapter(MinecraftServer server) {
@@ -45,7 +48,7 @@ public final class FabricGameAdapter implements GameAdapter {
     @Override
     public List<GamePlayer> getOnlinePlayers() {
         List<GamePlayer> players = new ArrayList<>();
-        for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+        for (ServerPlayerEntity player : server.getPlayerManager().getPlayerList()) {
             players.add(new FabricGamePlayer(player));
         }
         return players;
@@ -53,16 +56,16 @@ public final class FabricGameAdapter implements GameAdapter {
 
     @Override
     public void updateBossBar(GamePlayer player, String title, float progress) {
-        ServerPlayer handle = unwrap(player);
+        ServerPlayerEntity handle = unwrap(player);
         if (handle == null) {
             return;
         }
-        ServerBossEvent bossBar = bossBars.computeIfAbsent(handle.getUUID(), key -> new ServerBossEvent(
-            Component.literal(title),
-            ServerBossEvent.BossBarColor.BLUE,
-            ServerBossEvent.BossBarOverlay.PROGRESS
+        ServerBossBar bossBar = bossBars.computeIfAbsent(handle.getUuid(), key -> new ServerBossBar(
+            Text.literal(title),
+            BossBar.Color.BLUE,
+            BossBar.Style.PROGRESS
         ));
-        bossBar.setName(Component.literal(title));
+        bossBar.setName(Text.literal(title));
         bossBar.setProgress(progress);
         if (!bossBar.getPlayers().contains(handle)) {
             bossBar.addPlayer(handle);
@@ -71,11 +74,11 @@ public final class FabricGameAdapter implements GameAdapter {
 
     @Override
     public void clearBossBar(GamePlayer player) {
-        ServerPlayer handle = unwrap(player);
+        ServerPlayerEntity handle = unwrap(player);
         if (handle == null) {
             return;
         }
-        ServerBossEvent bossBar = bossBars.remove(handle.getUUID());
+        ServerBossBar bossBar = bossBars.remove(handle.getUuid());
         if (bossBar != null) {
             bossBar.removePlayer(handle);
         }
@@ -83,7 +86,7 @@ public final class FabricGameAdapter implements GameAdapter {
 
     @Override
     public void applyEffects(GamePlayer player, List<String> effects) {
-        ServerPlayer handle = unwrap(player);
+        ServerPlayerEntity handle = unwrap(player);
         if (handle == null) {
             return;
         }
@@ -91,17 +94,17 @@ public final class FabricGameAdapter implements GameAdapter {
         for (String effect : effects) {
             ChoiceEffect.fromId(effect).ifPresent(effectSet::add);
         }
-        activeEffects.put(handle.getUUID(), effectSet);
+        activeEffects.put(handle.getUuid(), effectSet);
         applyEffectSet(handle, effectSet);
     }
 
     @Override
     public void clearEffects(GamePlayer player) {
-        ServerPlayer handle = unwrap(player);
+        ServerPlayerEntity handle = unwrap(player);
         if (handle == null) {
             return;
         }
-        EnumSet<ChoiceEffect> effectSet = activeEffects.remove(handle.getUUID());
+        EnumSet<ChoiceEffect> effectSet = activeEffects.remove(handle.getUuid());
         if (effectSet != null) {
             removeEffectSet(handle, effectSet);
         }
@@ -114,105 +117,105 @@ public final class FabricGameAdapter implements GameAdapter {
 
     @Override
     public void show(GamePlayer player, Choice choice) {
-        ServerPlayer handle = unwrap(player);
+        ServerPlayerEntity handle = unwrap(player);
         if (handle == null) {
             return;
         }
-        FriendlyByteBuf buf = new FriendlyByteBuf(io.netty.buffer.Unpooled.buffer());
-        buf.writeUtf(choice.getPrompt());
+        PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
+        buf.writeString(choice.getPrompt());
         buf.writeInt(choice.getOptions().size());
-        choice.getOptions().forEach(option -> buf.writeUtf(option.getLabel()));
+        choice.getOptions().forEach(option -> buf.writeString(option.getLabel()));
         ServerPlayNetworking.send(handle, OPEN_CHOICE_PACKET, buf);
     }
 
     @Override
     public void close(GamePlayer player) {
-        ServerPlayer handle = unwrap(player);
+        ServerPlayerEntity handle = unwrap(player);
         if (handle != null) {
-            handle.closeContainer();
+            handle.closeHandledScreen();
         }
     }
 
-    private ServerPlayer unwrap(GamePlayer player) {
+    private ServerPlayerEntity unwrap(GamePlayer player) {
         if (player instanceof FabricGamePlayer fabricPlayer) {
             return fabricPlayer.getHandle();
         }
         return null;
     }
 
-    private void applyEffectSet(ServerPlayer player, EnumSet<ChoiceEffect> effects) {
+    private void applyEffectSet(ServerPlayerEntity player, EnumSet<ChoiceEffect> effects) {
         for (ChoiceEffect effect : effects) {
             switch (effect) {
-                case JUMP_BOOST_III -> player.addEffect(new MobEffectInstance(MobEffects.JUMP, EFFECT_DURATION_TICKS, 2, false, true));
-                case SPEED_II -> player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, EFFECT_DURATION_TICKS, 1, false, true));
-                case SLOWNESS_I -> player.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, EFFECT_DURATION_TICKS, 0, false, true));
-                case MINING_SPEED_2X -> player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, EFFECT_DURATION_TICKS, 1, false, true));
-                case MINING_SPEED_0_8X -> player.addEffect(new MobEffectInstance(MobEffects.DIG_SLOWDOWN, EFFECT_DURATION_TICKS, 0, false, true));
-                case PLACE_SPEED_2X -> player.addEffect(new MobEffectInstance(MobEffects.DIG_SPEED, EFFECT_DURATION_TICKS, 1, false, true));
-                case NIGHT_VISION -> player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, EFFECT_DURATION_TICKS, 0, false, true));
-                case REGENERATION_I -> player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, EFFECT_DURATION_TICKS, 0, false, true));
-                case DOLPHINS_GRACE -> player.addEffect(new MobEffectInstance(MobEffects.DOLPHINS_GRACE, EFFECT_DURATION_TICKS, 0, false, true));
-                case HUNGER_DRAIN_MULTIPLIER_1_5X -> player.addEffect(new MobEffectInstance(MobEffects.HUNGER, EFFECT_DURATION_TICKS, 0, false, true));
-                case AIR_LOSS_MULTIPLIER_1_5X -> player.addEffect(new MobEffectInstance(MobEffects.WATER_BREATHING, EFFECT_DURATION_TICKS, 0, false, true));
-                case LOOT_MULTIPLIER_1_3X -> player.addEffect(new MobEffectInstance(MobEffects.LUCK, EFFECT_DURATION_TICKS, 0, false, true));
-                case MOB_SPAWN_MULTIPLIER_1_3X -> player.addEffect(new MobEffectInstance(MobEffects.BAD_OMEN, EFFECT_DURATION_TICKS, 0, false, true));
-                case DAMAGE_MULTIPLIER_1_25X -> applyAttribute(player, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, effect.getValue() - 1.0, Operation.MULTIPLY_TOTAL);
-                case ATTACK_SPEED_MULTIPLIER_0_85X -> applyAttribute(player, Attributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER_ID, effect.getValue() - 1.0, Operation.MULTIPLY_TOTAL);
-                case ARMOR_MULTIPLIER_0_8X -> applyAttribute(player, Attributes.ARMOR, ARMOR_MODIFIER_ID, effect.getValue() - 1.0, Operation.MULTIPLY_TOTAL);
-                case KNOCKBACK_RESISTANCE -> applyAttribute(player, Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_MODIFIER_ID, effect.getValue(), Operation.ADDITION);
+                case JUMP_BOOST_III -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.JUMP_BOOST, EFFECT_DURATION_TICKS, 2, false, true));
+                case SPEED_II -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.SPEED, EFFECT_DURATION_TICKS, 1, false, true));
+                case SLOWNESS_I -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.SLOWNESS, EFFECT_DURATION_TICKS, 0, false, true));
+                case MINING_SPEED_2X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, EFFECT_DURATION_TICKS, 1, false, true));
+                case MINING_SPEED_0_8X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.MINING_FATIGUE, EFFECT_DURATION_TICKS, 0, false, true));
+                case PLACE_SPEED_2X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.HASTE, EFFECT_DURATION_TICKS, 1, false, true));
+                case NIGHT_VISION -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, EFFECT_DURATION_TICKS, 0, false, true));
+                case REGENERATION_I -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.REGENERATION, EFFECT_DURATION_TICKS, 0, false, true));
+                case DOLPHINS_GRACE -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.DOLPHINS_GRACE, EFFECT_DURATION_TICKS, 0, false, true));
+                case HUNGER_DRAIN_MULTIPLIER_1_5X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.HUNGER, EFFECT_DURATION_TICKS, 0, false, true));
+                case AIR_LOSS_MULTIPLIER_1_5X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.WATER_BREATHING, EFFECT_DURATION_TICKS, 0, false, true));
+                case LOOT_MULTIPLIER_1_3X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.LUCK, EFFECT_DURATION_TICKS, 0, false, true));
+                case MOB_SPAWN_MULTIPLIER_1_3X -> player.addStatusEffect(new StatusEffectInstance(StatusEffects.BAD_OMEN, EFFECT_DURATION_TICKS, 0, false, true));
+                case DAMAGE_MULTIPLIER_1_25X -> applyAttribute(player, EntityAttributes.GENERIC_ATTACK_DAMAGE, DAMAGE_MODIFIER_ID, effect.getValue() - 1.0, Operation.MULTIPLY_TOTAL);
+                case ATTACK_SPEED_MULTIPLIER_0_85X -> applyAttribute(player, EntityAttributes.GENERIC_ATTACK_SPEED, ATTACK_SPEED_MODIFIER_ID, effect.getValue() - 1.0, Operation.MULTIPLY_TOTAL);
+                case ARMOR_MULTIPLIER_0_8X -> applyAttribute(player, EntityAttributes.GENERIC_ARMOR, ARMOR_MODIFIER_ID, effect.getValue() - 1.0, Operation.MULTIPLY_TOTAL);
+                case KNOCKBACK_RESISTANCE -> applyAttribute(player, EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, KNOCKBACK_MODIFIER_ID, effect.getValue(), Operation.ADDITION);
                 default -> {
                 }
             }
         }
     }
 
-    private void removeEffectSet(ServerPlayer player, EnumSet<ChoiceEffect> effects) {
+    private void removeEffectSet(ServerPlayerEntity player, EnumSet<ChoiceEffect> effects) {
         for (ChoiceEffect effect : effects) {
             switch (effect) {
-                case JUMP_BOOST_III -> player.removeEffect(MobEffects.JUMP);
-                case SPEED_II -> player.removeEffect(MobEffects.MOVEMENT_SPEED);
-                case SLOWNESS_I -> player.removeEffect(MobEffects.MOVEMENT_SLOWDOWN);
-                case MINING_SPEED_2X -> player.removeEffect(MobEffects.DIG_SPEED);
-                case MINING_SPEED_0_8X -> player.removeEffect(MobEffects.DIG_SLOWDOWN);
-                case PLACE_SPEED_2X -> player.removeEffect(MobEffects.DIG_SPEED);
-                case NIGHT_VISION -> player.removeEffect(MobEffects.NIGHT_VISION);
-                case REGENERATION_I -> player.removeEffect(MobEffects.REGENERATION);
-                case DOLPHINS_GRACE -> player.removeEffect(MobEffects.DOLPHINS_GRACE);
-                case HUNGER_DRAIN_MULTIPLIER_1_5X -> player.removeEffect(MobEffects.HUNGER);
-                case AIR_LOSS_MULTIPLIER_1_5X -> player.removeEffect(MobEffects.WATER_BREATHING);
-                case LOOT_MULTIPLIER_1_3X -> player.removeEffect(MobEffects.LUCK);
-                case MOB_SPAWN_MULTIPLIER_1_3X -> player.removeEffect(MobEffects.BAD_OMEN);
-                case DAMAGE_MULTIPLIER_1_25X -> removeAttribute(player, Attributes.ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
-                case ATTACK_SPEED_MULTIPLIER_0_85X -> removeAttribute(player, Attributes.ATTACK_SPEED, ATTACK_SPEED_MODIFIER_ID);
-                case ARMOR_MULTIPLIER_0_8X -> removeAttribute(player, Attributes.ARMOR, ARMOR_MODIFIER_ID);
-                case KNOCKBACK_RESISTANCE -> removeAttribute(player, Attributes.KNOCKBACK_RESISTANCE, KNOCKBACK_MODIFIER_ID);
+                case JUMP_BOOST_III -> player.removeStatusEffect(StatusEffects.JUMP_BOOST);
+                case SPEED_II -> player.removeStatusEffect(StatusEffects.SPEED);
+                case SLOWNESS_I -> player.removeStatusEffect(StatusEffects.SLOWNESS);
+                case MINING_SPEED_2X -> player.removeStatusEffect(StatusEffects.HASTE);
+                case MINING_SPEED_0_8X -> player.removeStatusEffect(StatusEffects.MINING_FATIGUE);
+                case PLACE_SPEED_2X -> player.removeStatusEffect(StatusEffects.HASTE);
+                case NIGHT_VISION -> player.removeStatusEffect(StatusEffects.NIGHT_VISION);
+                case REGENERATION_I -> player.removeStatusEffect(StatusEffects.REGENERATION);
+                case DOLPHINS_GRACE -> player.removeStatusEffect(StatusEffects.DOLPHINS_GRACE);
+                case HUNGER_DRAIN_MULTIPLIER_1_5X -> player.removeStatusEffect(StatusEffects.HUNGER);
+                case AIR_LOSS_MULTIPLIER_1_5X -> player.removeStatusEffect(StatusEffects.WATER_BREATHING);
+                case LOOT_MULTIPLIER_1_3X -> player.removeStatusEffect(StatusEffects.LUCK);
+                case MOB_SPAWN_MULTIPLIER_1_3X -> player.removeStatusEffect(StatusEffects.BAD_OMEN);
+                case DAMAGE_MULTIPLIER_1_25X -> removeAttribute(player, EntityAttributes.GENERIC_ATTACK_DAMAGE, DAMAGE_MODIFIER_ID);
+                case ATTACK_SPEED_MULTIPLIER_0_85X -> removeAttribute(player, EntityAttributes.GENERIC_ATTACK_SPEED, ATTACK_SPEED_MODIFIER_ID);
+                case ARMOR_MULTIPLIER_0_8X -> removeAttribute(player, EntityAttributes.GENERIC_ARMOR, ARMOR_MODIFIER_ID);
+                case KNOCKBACK_RESISTANCE -> removeAttribute(player, EntityAttributes.GENERIC_KNOCKBACK_RESISTANCE, KNOCKBACK_MODIFIER_ID);
                 default -> {
                 }
             }
         }
     }
 
-    private void applyAttribute(ServerPlayer player, net.minecraft.world.entity.ai.attributes.Attribute attribute, UUID id, double amount, Operation operation) {
-        AttributeInstance instance = player.getAttribute(attribute);
+    private void applyAttribute(ServerPlayerEntity player, EntityAttribute attribute, UUID id, double amount, Operation operation) {
+        EntityAttributeInstance instance = player.getAttributeInstance(attribute);
         if (instance == null) {
             return;
         }
-        AttributeModifier existing = instance.getModifier(id);
+        EntityAttributeModifier existing = instance.getModifier(id);
         if (existing != null) {
             instance.removeModifier(id);
         }
-        instance.addPermanentModifier(new AttributeModifier(id, "choose_your_destin_effect", amount, operation));
+        instance.addPersistentModifier(new EntityAttributeModifier(id, "choose_your_destin_effect", amount, operation));
     }
 
-    private void removeAttribute(ServerPlayer player, net.minecraft.world.entity.ai.attributes.Attribute attribute, UUID id) {
-        AttributeInstance instance = player.getAttribute(attribute);
+    private void removeAttribute(ServerPlayerEntity player, EntityAttribute attribute, UUID id) {
+        EntityAttributeInstance instance = player.getAttributeInstance(attribute);
         if (instance != null) {
             instance.removeModifier(id);
         }
     }
 
-    double getMultiplier(ServerPlayer player, ChoiceEffect effect, double fallback) {
-        EnumSet<ChoiceEffect> effectSet = activeEffects.get(player.getUUID());
+    double getMultiplier(ServerPlayerEntity player, ChoiceEffect effect, double fallback) {
+        EnumSet<ChoiceEffect> effectSet = activeEffects.get(player.getUuid());
         if (effectSet != null && effectSet.contains(effect)) {
             return effect.getValue();
         }

@@ -2,22 +2,22 @@ package com.riczan.choosedestin.fabric;
 
 import com.riczan.choosedestin.GamePlayer;
 import java.util.UUID;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 public final class FabricGamePlayer implements GamePlayer {
-    private final ServerPlayer player;
+    private final ServerPlayerEntity player;
 
-    public FabricGamePlayer(ServerPlayer player) {
+    public FabricGamePlayer(ServerPlayerEntity player) {
         this.player = player;
     }
 
-    public ServerPlayer getHandle() {
+    public ServerPlayerEntity getHandle() {
         return player;
     }
 
     @Override
     public UUID getId() {
-        return player.getUUID();
+        return player.getUuid();
     }
 
     @Override

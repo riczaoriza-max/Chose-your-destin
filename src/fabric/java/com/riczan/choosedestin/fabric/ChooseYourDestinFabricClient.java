@@ -10,11 +10,11 @@ public final class ChooseYourDestinFabricClient implements ClientModInitializer 
     @Override
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(FabricGameAdapter.OPEN_CHOICE_PACKET, (client, handler, buf, responseSender) -> {
-            String prompt = buf.readUtf();
+            String prompt = buf.readString();
             int optionCount = buf.readInt();
             List<String> options = new ArrayList<>();
             for (int i = 0; i < optionCount; i++) {
-                options.add(buf.readUtf());
+                options.add(buf.readString());
             }
             client.execute(() -> Minecraft.getInstance().setScreen(new FabricChoiceScreen(prompt, options)));
         });

@@ -18,12 +18,12 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.util.Identifier;
+import net.minecraft.entity.LivingEntity;
 
 public final class ChooseYourDestinFabric implements ModInitializer {
-    public static final ResourceLocation SELECT_CHOICE_PACKET = new ResourceLocation("choose_your_destin", "select_choice");
+    public static final Identifier SELECT_CHOICE_PACKET = new Identifier("choose_your_destin", "select_choice");
 
     private static ChoiceRuntime runtime;
     private static FabricGameAdapter adapter;
@@ -58,10 +58,10 @@ public final class ChooseYourDestinFabric implements ModInitializer {
         });
 
         LivingEntityDamageEvents.MODIFY_DAMAGE.register((entity, source, amount) -> {
-            if (adapter == null || !(entity instanceof ServerPlayer player)) {
+            if (adapter == null || !(entity instanceof ServerPlayerEntity player)) {
                 return amount;
             }
-            if ("fall".equals(source.getMsgId())) {
+            if ("fall".equals(source.getName())) {
                 double multiplier = adapter.getMultiplier(player, ChoiceEffect.FALL_DAMAGE_MULTIPLIER_2X, 1.0);
                 return (float) (amount * multiplier);
             }
@@ -69,7 +69,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
         });
 
         BlockDropItemsCallback.EVENT.register((world, player, pos, state, blockEntity, tool, drops) -> {
-            if (adapter == null || !(player instanceof ServerPlayer serverPlayer)) {
+            if (adapter == null || !(player instanceof ServerPlayerEntity serverPlayer)) {
                 return;
             }
             double multiplier = adapter.getMultiplier(serverPlayer, ChoiceEffect.RESOURCE_DROP_MULTIPLIER_0_7X, 1.0);
@@ -79,7 +79,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
         });
 
         LivingEntityDropEvents.MODIFY.register((entity, source, drops, recentlyHit) -> {
-            if (adapter == null || !(source.getEntity() instanceof ServerPlayer player)) {
+            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player)) {
                 return;
             }
             double multiplier = adapter.getMultiplier(player, ChoiceEffect.RESOURCE_DROP_MULTIPLIER_0_7X, 1.0);
@@ -89,12 +89,12 @@ public final class ChooseYourDestinFabric implements ModInitializer {
         });
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            if (adapter == null || !(source.getEntity() instanceof ServerPlayer player) || !(entity instanceof LivingEntity livingEntity)) {
+            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player) || !(entity instanceof LivingEntity livingEntity)) {
                 return;
             }
             double multiplier = adapter.getMultiplier(player, ChoiceEffect.XP_MULTIPLIER_0_8X, 1.0);
             if (multiplier < 1.0) {
-                int baseXp = livingEntity.getExperienceReward();
+                int baseXp = livingEntity.getXpToDrop();
                 int reduction = (int) Math.floor(baseXp * (1.0 - multiplier));
                 if (reduction > 0) {
                     player.giveExperiencePoints(-reduction);
