@@ -10,26 +10,27 @@ import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.entity.event.v1.LivingEntityDamageEvents;
-import net.fabricmc.fabric.api.entity.event.v1.LivingEntityDropEvents;
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents;
-import net.fabricmc.fabric.api.event.player.BlockDropItemsCallback;
+import net.fabricmc.fabric.api.loot.v2.LootTableEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
-import net.minecraft.entity.LivingEntity;
 
 public final class ChooseYourDestinFabric implements ModInitializer {
     public static final Identifier SELECT_CHOICE_PACKET = new Identifier("choose_your_destin", "select_choice");
 
     private static ChoiceRuntime runtime;
     private static FabricGameAdapter adapter;
+    private static final ThreadLocal<Boolean> DAMAGE_REENTRY = ThreadLocal.withInitial(() -> false);
+    private static final String ENTITY_LOOT_PREFIX = "entities/";
+    private static final String BLOCK_LOOT_PREFIX = "blocks/";
 
     @Override
     public void onInitialize() {
+        ChoiceLootFunction.register();
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             adapter = new FabricGameAdapter(server);
             ChoiceConfig config = loadConfig(FabricLoader.getInstance().getConfigDir());
@@ -57,47 +58,46 @@ public final class ChooseYourDestinFabric implements ModInitializer {
             });
         });
 
-        LivingEntityDamageEvents.MODIFY_DAMAGE.register((entity, source, amount) -> {
+        ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
             if (adapter == null || !(entity instanceof ServerPlayerEntity player)) {
-                return amount;
+                return true;
+            }
+            if (Boolean.TRUE.equals(DAMAGE_REENTRY.get())) {
+                return true;
             }
             if ("fall".equals(source.getName())) {
                 double multiplier = adapter.getMultiplier(player, ChoiceEffect.FALL_DAMAGE_MULTIPLIER_2X, 1.0);
-                return (float) (amount * multiplier);
+                if (Double.compare(multiplier, 1.0) != 0) {
+                    DAMAGE_REENTRY.set(true);
+                    entity.damage(source, (float) (amount * multiplier));
+                    DAMAGE_REENTRY.set(false);
+                    return false;
+                }
             }
-            return amount;
+            return true;
         });
 
-        BlockDropItemsCallback.EVENT.register((world, player, pos, state, blockEntity, tool, drops) -> {
-            if (adapter == null || !(player instanceof ServerPlayerEntity serverPlayer)) {
+        LootTableEvents.MODIFY.register((resourceManager, lootManager, id, tableBuilder, source) -> {
+            if (!"minecraft".equals(id.getNamespace())) {
                 return;
             }
-            double multiplier = adapter.getMultiplier(serverPlayer, ChoiceEffect.RESOURCE_DROP_MULTIPLIER_0_7X, 1.0);
-            if (multiplier < 1.0) {
-                drops.forEach(itemEntity -> itemEntity.getItem().setCount((int) Math.max(1, Math.floor(itemEntity.getItem().getCount() * multiplier))));
-            }
-        });
-
-        LivingEntityDropEvents.MODIFY.register((entity, source, drops, recentlyHit) -> {
-            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player)) {
+            String path = id.getPath();
+            if (!path.startsWith(ENTITY_LOOT_PREFIX) && !path.startsWith(BLOCK_LOOT_PREFIX)) {
                 return;
             }
-            double multiplier = adapter.getMultiplier(player, ChoiceEffect.RESOURCE_DROP_MULTIPLIER_0_7X, 1.0);
-            if (multiplier < 1.0) {
-                drops.forEach(itemEntity -> itemEntity.getItem().setCount((int) Math.max(1, Math.floor(itemEntity.getItem().getCount() * multiplier))));
-            }
+            tableBuilder.modifyPools(poolBuilder -> poolBuilder.apply(ChoiceLootFunction.builder()));
         });
 
         ServerLivingEntityEvents.AFTER_DEATH.register((entity, source) -> {
-            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player) || !(entity instanceof LivingEntity livingEntity)) {
+            if (adapter == null || !(source.getAttacker() instanceof ServerPlayerEntity player)) {
                 return;
             }
             double multiplier = adapter.getMultiplier(player, ChoiceEffect.XP_MULTIPLIER_0_8X, 1.0);
             if (multiplier < 1.0) {
-                int baseXp = livingEntity.getXpToDrop();
+                int baseXp = entity.getXpToDrop();
                 int reduction = (int) Math.floor(baseXp * (1.0 - multiplier));
                 if (reduction > 0) {
-                    player.giveExperiencePoints(-reduction);
+                    player.addExperience(-reduction);
                 }
             }
         });
@@ -118,5 +118,12 @@ public final class ChooseYourDestinFabric implements ModInitializer {
         } catch (IOException ex) {
             throw new IllegalStateException("Failed to load choices config", ex);
         }
+    }
+
+    static double getPlayerMultiplier(ServerPlayerEntity player, ChoiceEffect effect, double fallback) {
+        if (adapter == null) {
+            return fallback;
+        }
+        return adapter.getMultiplier(player, effect, fallback);
     }
 }
