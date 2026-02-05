@@ -14,15 +14,21 @@ public final class ChoiceRuntime {
         List<Choice> original = config.getChoices();
         List<Choice> normalized = new java.util.ArrayList<>();
         for (Choice choice : original) {
+            List<ChoiceOption> options = normalizeOptions(choice.getOptions());
             if (choice.getDurationSeconds() <= 0) {
                 normalized.add(new Choice(
                     choice.getId(),
                     choice.getPrompt(),
-                    choice.getOptions(),
+                    options,
                     config.getDurationSeconds()
                 ));
             } else {
-                normalized.add(choice);
+                normalized.add(new Choice(
+                    choice.getId(),
+                    choice.getPrompt(),
+                    options,
+                    choice.getDurationSeconds()
+                ));
             }
         }
         return new ChoiceRuntime(new ChoiceManager(adapter, normalized));
@@ -38,5 +44,16 @@ public final class ChoiceRuntime {
 
     public void select(GamePlayer player, int optionIndex) {
         manager.selectOption(player, optionIndex);
+    }
+
+    private static List<ChoiceOption> normalizeOptions(List<ChoiceOption> options) {
+        List<ChoiceOption> normalized = new java.util.ArrayList<>(options);
+        if (normalized.size() > 2) {
+            normalized = normalized.subList(0, 2);
+        }
+        while (normalized.size() < 2) {
+            normalized.add(new ChoiceOption("Equilíbrio total", java.util.List.of()));
+        }
+        return java.util.List.copyOf(normalized);
     }
 }
