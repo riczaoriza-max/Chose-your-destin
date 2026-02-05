@@ -5,6 +5,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = 'choose-your-destin'
+rootProject.name = 'choose-your-destiny'
 
 include('common', 'fabric')

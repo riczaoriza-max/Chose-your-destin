@@ -29,7 +29,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public final class FabricGameAdapter implements GameAdapter {
-    static final Identifier OPEN_CHOICE_PACKET = new Identifier("choose_your_destin", "open_choice");
+    static final Identifier OPEN_CHOICE_PACKET = new Identifier("choose_your_destiny", "open_choice");
 
     private static final int EFFECT_DURATION_TICKS = 20 * 60 * 5;
     private static final UUID DAMAGE_MODIFIER_ID = UUID.fromString("e44a7d2b-5f9b-4d45-97f7-8f584fc35c21");
@@ -220,7 +220,7 @@ public final class FabricGameAdapter implements GameAdapter {
         if (existing != null) {
             instance.removeModifier(id);
         }
-        instance.addPersistentModifier(new EntityAttributeModifier(id, "choose_your_destin_effect", amount, operation));
+        instance.addPersistentModifier(new EntityAttributeModifier(id, "choose_your_destiny_effect", amount, operation));
     }
 
     private void removeAttribute(ServerPlayerEntity player, EntityAttribute attribute, UUID id) {

@@ -19,7 +19,7 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
 
 public final class ChoiceLootFunction extends ConditionalLootFunction {
-    public static final Identifier ID = new Identifier("choose_your_destin", "choice_multiplier");
+    public static final Identifier ID = new Identifier("choose_your_destiny", "choice_multiplier");
     private static LootFunctionType type;
 
     private ChoiceLootFunction(LootCondition[] conditions) {
