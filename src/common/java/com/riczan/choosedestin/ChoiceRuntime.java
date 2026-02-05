@@ -52,7 +52,7 @@ public final class ChoiceRuntime {
             normalized = normalized.subList(0, 2);
         }
         while (normalized.size() < 2) {
-            normalized.add(new ChoiceOption("Equilíbrio total", java.util.List.of()));
+            normalized.add(new ChoiceOption("Balanced path", java.util.List.of()));
         }
         return java.util.List.copyOf(normalized);
     }

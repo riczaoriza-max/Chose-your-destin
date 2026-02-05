@@ -5,6 +5,9 @@
   "name": "Choose Your Destin",
   "description": "Timed gameplay choices with a menu and boss bar.",
   "authors": ["riczan"],
+  "contact": {
+    "homepage": "https://www.curseforge.com/members/riczan/projects"
+  },
   "icon": "icon.png",
   "license": "ARR",
   "environment": "*",

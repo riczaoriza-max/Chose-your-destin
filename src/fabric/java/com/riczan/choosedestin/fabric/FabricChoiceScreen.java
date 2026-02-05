@@ -13,7 +13,7 @@ import net.minecraft.text.Text;
 
 public final class FabricChoiceScreen extends Screen {
     private static final String NO_BONUS_LABEL = "no bonus";
-    private static final String NEUTRAL_OPTION_LABEL = "Equilíbrio total";
+    private static final String NEUTRAL_OPTION_LABEL = "Balanced path";
     private static final int PANEL_PADDING = 16;
     private static final int BUTTON_SPACING = 12;
     private static final int BUTTON_HEIGHT = 22;
@@ -44,10 +44,10 @@ public final class FabricChoiceScreen extends Screen {
         int leftButtonX = centerX - BUTTON_SPACING / 2 - buttonWidth;
         int rightButtonX = centerX + BUTTON_SPACING / 2;
 
-        addDrawableChild(ButtonWidget.builder(Text.literal("Opção 1"), button -> sendSelection(0))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Option 1"), button -> sendSelection(0))
             .dimensions(leftButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
-        addDrawableChild(ButtonWidget.builder(Text.literal("Opção 2"), button -> sendSelection(1))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Option 2"), button -> sendSelection(1))
             .dimensions(rightButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
     }
@@ -80,14 +80,14 @@ public final class FabricChoiceScreen extends Screen {
         context.fill(rightPanelLeft, choicePanelTop, rightPanelLeft + CHOICE_PANEL_WIDTH, choicePanelBottom, ORANGE_PANEL_COLOR);
 
         int optionTextY = choicePanelTop + PANEL_PADDING;
-        context.drawText(textRenderer, Text.literal("Opção 1"), leftPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
+        context.drawText(textRenderer, Text.literal("Option 1"), leftPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
         int leftTextY = optionTextY + textRenderer.fontHeight + 4;
         for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(options.get(0)), CHOICE_PANEL_WIDTH - PANEL_PADDING * 2)) {
             context.drawText(textRenderer, line, leftPanelLeft + PANEL_PADDING, leftTextY, 0xE6E6E6, false);
             leftTextY += textRenderer.fontHeight + 2;
         }
 
-        context.drawText(textRenderer, Text.literal("Opção 2"), rightPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
+        context.drawText(textRenderer, Text.literal("Option 2"), rightPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
         int rightTextY = optionTextY + textRenderer.fontHeight + 4;
         for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(options.get(1)), CHOICE_PANEL_WIDTH - PANEL_PADDING * 2)) {
             context.drawText(textRenderer, line, rightPanelLeft + PANEL_PADDING, rightTextY, 0xFFF1E0, false);
@@ -112,7 +112,7 @@ public final class FabricChoiceScreen extends Screen {
 
     private static String normalizePrompt(String prompt) {
         if (prompt == null) {
-            return "Preferes a opção 1 ou a opção 2?";
+            return "Do you prefer option 1 or option 2?";
         }
         return prompt.replaceAll("(?i)\\s+or\\s+no\\s+bonus\\??$", "");
     }
