@@ -62,11 +62,13 @@ public final class FabricGameAdapter implements GameAdapter {
         }
         ServerBossBar bossBar = bossBars.computeIfAbsent(handle.getUuid(), key -> new ServerBossBar(
             Text.literal(title),
-            BossBar.Color.BLUE,
-            BossBar.Style.PROGRESS
+            BossBar.Color.GREEN,
+            BossBar.Style.NOTCHED_10
         ));
+        float normalizedProgress = Math.max(0.0f, Math.min(1.0f, progress));
         bossBar.setName(Text.literal(title));
-        bossBar.setPercent(progress);
+        bossBar.setPercent(normalizedProgress);
+        updateBossBarStyle(bossBar, normalizedProgress);
         if (!bossBar.getPlayers().contains(handle)) {
             bossBar.addPlayer(handle);
         }
@@ -141,6 +143,20 @@ public final class FabricGameAdapter implements GameAdapter {
             return fabricPlayer.getHandle();
         }
         return null;
+    }
+
+
+    private void updateBossBarStyle(ServerBossBar bossBar, float progress) {
+        if (progress > 0.66f) {
+            bossBar.setColor(BossBar.Color.GREEN);
+            bossBar.setStyle(BossBar.Style.NOTCHED_10);
+        } else if (progress > 0.33f) {
+            bossBar.setColor(BossBar.Color.YELLOW);
+            bossBar.setStyle(BossBar.Style.NOTCHED_12);
+        } else {
+            bossBar.setColor(BossBar.Color.RED);
+            bossBar.setStyle(BossBar.Style.NOTCHED_20);
+        }
     }
 
     private void applyEffectSet(ServerPlayerEntity player, EnumSet<ChoiceEffect> effects) {

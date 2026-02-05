@@ -67,7 +67,7 @@ public final class ChoiceManager {
             int duration = activeChoice.getChoice().getDurationSeconds();
             long remaining = Math.max(0, duration - elapsed);
             float progress = duration == 0 ? 0.0f : (float) remaining / (float) duration;
-            adapter.updateBossBar(player, "Active Choice · " + normalizePrompt(activeChoice.getChoice().getPrompt()), progress);
+            adapter.updateBossBar(player, formatBossBarTitle(activeChoice.getChoice().getPrompt(), remaining), progress);
             if (remaining <= 0) {
                 adapter.clearEffects(player);
                 adapter.clearBossBar(player);
@@ -82,6 +82,14 @@ public final class ChoiceManager {
             return "Select Option 1 or Option 2";
         }
         return prompt.replaceAll("(?i)\\s+or\\s+no\\s+bonus\\??$", "");
+    }
+
+    private String formatBossBarTitle(String prompt, long remaining) {
+        String clean = normalizePrompt(prompt);
+        if (clean.length() > 64) {
+            clean = clean.substring(0, 61) + "...";
+        }
+        return "✦ Active Choice ✦ " + clean + " §7(" + remaining + "s)";
     }
 
     private Choice nextChoice(GamePlayer player) {
