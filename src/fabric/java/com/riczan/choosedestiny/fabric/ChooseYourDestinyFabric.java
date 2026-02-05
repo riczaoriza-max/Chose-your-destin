@@ -69,12 +69,12 @@ public final class ChooseYourDestinyFabric implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.getPlayer();
-            MutableText message = Text.literal("[Choose Your Destiny] Thanks for playing! Want more mods? ")
-                .append(Text.literal("Click here")
+            String curseForgeUrl = "https://www.curseforge.com/members/riczan/projects";
+            MutableText message = Text.literal("[Choose Your Destiny] Meu CurseForge: ")
+                .append(Text.literal(curseForgeUrl)
                     .setStyle(Style.EMPTY
                         .withUnderline(true)
-                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.curseforge.com/members/riczan/projects"))))
-                .append(Text.literal(" to visit my CurseForge page."));
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, curseForgeUrl))));
             player.sendMessage(message, false);
         });
 
