@@ -19,6 +19,12 @@ public final class FabricChoiceScreen extends Screen {
     private static final int BUTTON_HEIGHT = 22;
     private static final int PANEL_WIDTH = 320;
     private static final int PANEL_HEIGHT = 160;
+    private static final int CHOICE_PANEL_WIDTH = 200;
+    private static final int CHOICE_PANEL_HEIGHT = 110;
+    private static final int BLUE_PANEL_COLOR = 0xAA1E4FA3;
+    private static final int ORANGE_PANEL_COLOR = 0xAAC45C12;
+    private static final int BLUE_BUTTON_COLOR = 0xFF3C6FD9;
+    private static final int ORANGE_BUTTON_COLOR = 0xFFE48A1D;
 
     private final String prompt;
     private final List<String> options;
@@ -33,14 +39,16 @@ public final class FabricChoiceScreen extends Screen {
     protected void init() {
         int centerX = width / 2;
         int panelTop = height / 2 - PANEL_HEIGHT / 2;
-        int buttonWidth = PANEL_WIDTH - PANEL_PADDING * 2;
-        int firstButtonY = panelTop + PANEL_HEIGHT - PANEL_PADDING - BUTTON_HEIGHT * 2 - BUTTON_SPACING;
+        int buttonWidth = (PANEL_WIDTH - PANEL_PADDING * 2 - BUTTON_SPACING) / 2;
+        int buttonY = panelTop + PANEL_HEIGHT - PANEL_PADDING - BUTTON_HEIGHT;
+        int leftButtonX = centerX - BUTTON_SPACING / 2 - buttonWidth;
+        int rightButtonX = centerX + BUTTON_SPACING / 2;
 
         addDrawableChild(ButtonWidget.builder(Text.literal("Opção 1"), button -> sendSelection(0))
-            .dimensions(centerX - buttonWidth / 2, firstButtonY, buttonWidth, BUTTON_HEIGHT)
+            .dimensions(leftButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
         addDrawableChild(ButtonWidget.builder(Text.literal("Opção 2"), button -> sendSelection(1))
-            .dimensions(centerX - buttonWidth / 2, firstButtonY + BUTTON_HEIGHT + BUTTON_SPACING, buttonWidth, BUTTON_HEIGHT)
+            .dimensions(rightButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
     }
 
@@ -62,9 +70,27 @@ public final class FabricChoiceScreen extends Screen {
             promptY += textRenderer.fontHeight + 2;
         }
 
-        int optionTextY = panelTop + PANEL_HEIGHT - PANEL_PADDING - BUTTON_HEIGHT * 2 - BUTTON_SPACING - (textRenderer.fontHeight * 2);
-        context.drawText(textRenderer, Text.literal("Opção 1 — " + options.get(0)), panelLeft + PANEL_PADDING, optionTextY, 0xCFCFCF, false);
-        context.drawText(textRenderer, Text.literal("Opção 2 — " + options.get(1)), panelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 2, 0xCFCFCF, false);
+        int choicePanelTop = panelTop + PANEL_PADDING + 48;
+        int leftPanelLeft = panelLeft + PANEL_PADDING;
+        int rightPanelLeft = panelRight - PANEL_PADDING - CHOICE_PANEL_WIDTH;
+        int choicePanelBottom = choicePanelTop + CHOICE_PANEL_HEIGHT;
+
+        context.fill(leftPanelLeft, choicePanelTop, leftPanelLeft + CHOICE_PANEL_WIDTH, choicePanelBottom, BLUE_PANEL_COLOR);
+        context.fill(rightPanelLeft, choicePanelTop, rightPanelLeft + CHOICE_PANEL_WIDTH, choicePanelBottom, ORANGE_PANEL_COLOR);
+
+        int optionTextY = choicePanelTop + PANEL_PADDING;
+        context.drawText(textRenderer, Text.literal("Opção 1"), leftPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
+        context.drawText(textRenderer, Text.literal(options.get(0)), leftPanelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 4, 0xE6E6E6, false);
+
+        context.drawText(textRenderer, Text.literal("Opção 2"), rightPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
+        context.drawText(textRenderer, Text.literal(options.get(1)), rightPanelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 4, 0xFFF1E0, false);
+
+        int buttonWidth = (PANEL_WIDTH - PANEL_PADDING * 2 - BUTTON_SPACING) / 2;
+        int buttonY = panelBottom - PANEL_PADDING - BUTTON_HEIGHT;
+        int leftButtonX = width / 2 - BUTTON_SPACING / 2 - buttonWidth;
+        int rightButtonX = width / 2 + BUTTON_SPACING / 2;
+        context.fill(leftButtonX - 2, buttonY - 2, leftButtonX + buttonWidth + 2, buttonY + BUTTON_HEIGHT + 2, BLUE_BUTTON_COLOR);
+        context.fill(rightButtonX - 2, buttonY - 2, rightButtonX + buttonWidth + 2, buttonY + BUTTON_HEIGHT + 2, ORANGE_BUTTON_COLOR);
         super.render(context, mouseX, mouseY, delta);
     }
 
