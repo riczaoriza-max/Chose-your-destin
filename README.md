@@ -1,4 +1,4 @@
-# Choose Your Destin (v1)
+# Choose Your Destiny (v1)
 
 **Author:** riczan  
 **License:** ARR (All Rights Reserved)  

@@ -69,7 +69,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.getPlayer();
-            MutableText message = Text.literal("[Chose Your Destin] Thanks for playing! Want more mods? ")
+            MutableText message = Text.literal("[Choose Your Destiny] Thanks for playing! Want more mods? ")
                 .append(Text.literal("Click here")
                     .setStyle(Style.EMPTY
                         .withUnderline(true)

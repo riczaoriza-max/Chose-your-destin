@@ -30,7 +30,7 @@ public final class FabricChoiceScreen extends Screen {
     private final List<String> options;
 
     public FabricChoiceScreen(String prompt, List<String> options) {
-        super(Text.literal("Choose Your Destin"));
+        super(Text.literal("Choose Your Destiny"));
         this.prompt = normalizePrompt(prompt);
         this.options = normalizeOptions(options);
     }
