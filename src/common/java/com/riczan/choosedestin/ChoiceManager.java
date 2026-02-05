@@ -46,6 +46,9 @@ public final class ChoiceManager {
         if (activeChoice == null) {
             return;
         }
+        if (optionIndex < 0 || optionIndex >= activeChoice.getChoice().getOptions().size()) {
+            return;
+        }
         activeChoice.setSelectedIndex(optionIndex);
         ChoiceOption option = activeChoice.getChoice().getOptions().get(optionIndex);
         adapter.clearEffects(player);

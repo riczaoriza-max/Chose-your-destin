@@ -44,10 +44,10 @@ public final class FabricChoiceScreen extends Screen {
         int leftButtonX = centerX - BUTTON_SPACING / 2 - buttonWidth;
         int rightButtonX = centerX + BUTTON_SPACING / 2;
 
-        addDrawableChild(ButtonWidget.builder(Text.literal("Option 1"), button -> sendSelection(0))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Pick 1: " + shortLabel(options.get(0))), button -> sendSelection(0))
             .dimensions(leftButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
-        addDrawableChild(ButtonWidget.builder(Text.literal("Option 2"), button -> sendSelection(1))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Pick 2: " + shortLabel(options.get(1))), button -> sendSelection(1))
             .dimensions(rightButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
     }
@@ -122,7 +122,7 @@ public final class FabricChoiceScreen extends Screen {
         for (int i = 0; i < options.size(); i++) {
             String label = options.get(i);
             if (label == null) {
-                normalized.add("Escolha " + (i + 1));
+                normalized.add("Choice " + (i + 1));
                 continue;
             }
             String lower = label.toLowerCase(Locale.ROOT).trim();
@@ -133,8 +133,18 @@ public final class FabricChoiceScreen extends Screen {
             }
         }
         while (normalized.size() < 2) {
-            normalized.add("Escolha " + (normalized.size() + 1));
+            normalized.add("Choice " + (normalized.size() + 1));
         }
         return normalized;
+    }
+
+    private static String shortLabel(String value) {
+        if (value == null || value.isBlank()) {
+            return "Choice";
+        }
+        if (value.length() <= 24) {
+            return value;
+        }
+        return value.substring(0, 21) + "...";
     }
 }

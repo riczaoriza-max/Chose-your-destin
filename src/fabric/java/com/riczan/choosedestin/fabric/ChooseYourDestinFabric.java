@@ -18,6 +18,9 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.ClickEvent;
+import net.minecraft.text.MutableText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
@@ -66,7 +69,13 @@ public final class ChooseYourDestinFabric implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.getPlayer();
-            player.sendMessage(Text.literal("[Chose Your Destin] Thanks for playing! Want more mods? Visit https://www.curseforge.com/members/riczan/projects"), false);
+            MutableText message = Text.literal("[Chose Your Destin] Thanks for playing! Want more mods? ")
+                .append(Text.literal("Click here")
+                    .setStyle(Style.EMPTY
+                        .withUnderline(true)
+                        .withClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://www.curseforge.com/members/riczan/projects"))))
+                .append(Text.literal(" to visit my CurseForge page."));
+            player.sendMessage(message, false);
         });
 
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
