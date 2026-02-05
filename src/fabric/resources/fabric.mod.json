@@ -5,6 +5,7 @@
   "name": "Choose Your Destin",
   "description": "Timed gameplay choices with a menu and boss bar.",
   "authors": ["riczan"],
+  "icon": "icon.png",
   "license": "ARR",
   "environment": "*",
   "entrypoints": {
