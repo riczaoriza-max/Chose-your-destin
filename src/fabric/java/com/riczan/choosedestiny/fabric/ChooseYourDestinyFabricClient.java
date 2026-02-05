@@ -1,4 +1,4 @@
-package com.riczan.choosedestin.fabric;
+package com.riczan.choosedestiny.fabric;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
 
-public final class ChooseYourDestinFabricClient implements ClientModInitializer {
+public final class ChooseYourDestinyFabricClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         ClientPlayNetworking.registerGlobalReceiver(FabricGameAdapter.OPEN_CHOICE_PACKET, (client, handler, buf, responseSender) -> {

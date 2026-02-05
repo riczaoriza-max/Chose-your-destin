@@ -1,4 +1,4 @@
-package com.riczan.choosedestin;
+package com.riczan.choosedestiny;
 
 import java.util.List;
 import java.util.Random;

@@ -1,4 +1,4 @@
-package com.riczan.choosedestin;
+package com.riczan.choosedestiny;
 
 public interface ChoiceMenu {
     void show(GamePlayer player, Choice choice);

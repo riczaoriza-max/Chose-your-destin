@@ -1,4 +1,4 @@
-package com.riczan.choosedestin.fabric;
+package com.riczan.choosedestiny.fabric;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,7 +106,7 @@ public final class FabricChoiceScreen extends Screen {
     private void sendSelection(int index) {
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(index);
-        ClientPlayNetworking.send(ChooseYourDestinFabric.SELECT_CHOICE_PACKET, buf);
+        ClientPlayNetworking.send(ChooseYourDestinyFabric.SELECT_CHOICE_PACKET, buf);
         MinecraftClient.getInstance().setScreen(null);
     }
 

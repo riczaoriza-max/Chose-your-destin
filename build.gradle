@@ -1,5 +1,5 @@
 allprojects {
-    group = 'com.riczan.choosedestin'
+    group = 'com.riczan.choosedestiny'
     version = '1.1.0'
 
     repositories {

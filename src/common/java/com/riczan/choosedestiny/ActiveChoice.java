@@ -1,4 +1,4 @@
-package com.riczan.choosedestin;
+package com.riczan.choosedestiny;
 
 public final class ActiveChoice {
     private final Choice choice;

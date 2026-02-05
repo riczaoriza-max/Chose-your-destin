@@ -8,7 +8,7 @@
 
 ## Configuration loading
 
-- `ChoiceConfigLoader` uses Gson to load `config/choices.json`.
+- `ChoiceConfigLoader` uses Gson to load the bundled `src/common/resources/choose_your_destiny/choices.json`.
 - `ChoiceRuntime.fromConfig(...)` normalizes the default duration when a choice omits `durationSeconds`.
 
 ## Boss bar
@@ -25,7 +25,7 @@
 
 ## Effect mapping
 
-Effects are defined in `config/choices.json` using string keys. For the real implementation:
+Effects are defined in `choices.json` (bundled under `choose_your_destiny/` and copied to config) using string keys. For the real implementation:
 
 - Map effects to concrete attributes (speed, damage, mining, hunger, etc.).
 - Use attributes or potion effects as needed.

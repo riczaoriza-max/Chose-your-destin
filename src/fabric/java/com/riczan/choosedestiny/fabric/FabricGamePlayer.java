@@ -1,6 +1,6 @@
-package com.riczan.choosedestin.fabric;
+package com.riczan.choosedestiny.fabric;
 
-import com.riczan.choosedestin.GamePlayer;
+import com.riczan.choosedestiny.GamePlayer;
 import java.util.UUID;
 import net.minecraft.server.network.ServerPlayerEntity;
 

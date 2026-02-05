@@ -1,10 +1,10 @@
-package com.riczan.choosedestin.fabric;
+package com.riczan.choosedestiny.fabric;
 
 import com.google.gson.Gson;
-import com.riczan.choosedestin.ChoiceConfig;
-import com.riczan.choosedestin.ChoiceConfigLoader;
-import com.riczan.choosedestin.ChoiceEffect;
-import com.riczan.choosedestin.ChoiceRuntime;
+import com.riczan.choosedestiny.ChoiceConfig;
+import com.riczan.choosedestiny.ChoiceConfigLoader;
+import com.riczan.choosedestiny.ChoiceEffect;
+import com.riczan.choosedestiny.ChoiceRuntime;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
@@ -26,7 +26,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public final class ChooseYourDestinFabric implements ModInitializer {
+public final class ChooseYourDestinyFabric implements ModInitializer {
     public static final Identifier SELECT_CHOICE_PACKET = new Identifier("choose_your_destiny", "select_choice");
     private static final Logger LOGGER = LoggerFactory.getLogger("choose_your_destiny");
 

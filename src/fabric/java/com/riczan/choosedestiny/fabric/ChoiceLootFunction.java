@@ -1,9 +1,9 @@
-package com.riczan.choosedestin.fabric;
+package com.riczan.choosedestiny.fabric;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import com.riczan.choosedestin.ChoiceEffect;
+import com.riczan.choosedestiny.ChoiceEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -49,7 +49,7 @@ public final class ChoiceLootFunction extends ConditionalLootFunction {
         if (player == null) {
             return stack;
         }
-        double multiplier = ChooseYourDestinFabric.getPlayerMultiplier(player, ChoiceEffect.RESOURCE_DROP_MULTIPLIER_0_7X, 1.0);
+        double multiplier = ChooseYourDestinyFabric.getPlayerMultiplier(player, ChoiceEffect.RESOURCE_DROP_MULTIPLIER_0_7X, 1.0);
         if (multiplier >= 1.0) {
             return stack;
         }

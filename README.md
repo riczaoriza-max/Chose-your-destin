@@ -23,12 +23,13 @@ This repository provides a Fabric project with shared logic in `common` and a Fa
 
 - `src/common/java/...`: shared logic (choices, timer, boss bar, effects).
 - `src/fabric/java/...`: Fabric entrypoint to register events and load shared logic.
-- `config/choices.json`: data file with prompts and options (100+).
+- `src/common/resources/choose_your_destiny/choices.json`: bundled default data file with prompts and options (100+).
+- `config/choose_your_destiny/choices.json`: runtime override written/read from the Minecraft config directory.
 - `ChoiceConfigLoader`: Gson-based data loading (available in the Minecraft runtime).
 
 ## Data content
 
-`config/choices.json` defines the questions and options. Each choice includes:
+`choices.json` defines the questions and options (bundled under `choose_your_destiny/` and copied to the config directory on first run). Each choice includes:
 
 - `id`: identifier.
 - `prompt`: text shown to the player.
