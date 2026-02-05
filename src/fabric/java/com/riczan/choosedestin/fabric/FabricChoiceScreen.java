@@ -13,6 +13,7 @@ import net.minecraft.text.Text;
 
 public final class FabricChoiceScreen extends Screen {
     private static final String NO_BONUS_LABEL = "no bonus";
+    private static final String NEUTRAL_OPTION_LABEL = "Equilíbrio total";
     private static final int PANEL_PADDING = 16;
     private static final int BUTTON_SPACING = 12;
     private static final int BUTTON_HEIGHT = 22;
@@ -62,8 +63,8 @@ public final class FabricChoiceScreen extends Screen {
         }
 
         int optionTextY = panelTop + PANEL_HEIGHT - PANEL_PADDING - BUTTON_HEIGHT * 2 - BUTTON_SPACING - (textRenderer.fontHeight * 2);
-        context.drawText(textRenderer, Text.literal(options.get(0)), panelLeft + PANEL_PADDING, optionTextY, 0xCFCFCF, false);
-        context.drawText(textRenderer, Text.literal(options.get(1)), panelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 2, 0xCFCFCF, false);
+        context.drawText(textRenderer, Text.literal("Opção 1 — " + options.get(0)), panelLeft + PANEL_PADDING, optionTextY, 0xCFCFCF, false);
+        context.drawText(textRenderer, Text.literal("Opção 2 — " + options.get(1)), panelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 2, 0xCFCFCF, false);
         super.render(context, mouseX, mouseY, delta);
     }
 
@@ -91,7 +92,7 @@ public final class FabricChoiceScreen extends Screen {
             }
             String lower = label.toLowerCase(Locale.ROOT).trim();
             if (NO_BONUS_LABEL.equals(lower)) {
-                normalized.add(i == 0 ? "Caminho A" : "Caminho B");
+                normalized.add(NEUTRAL_OPTION_LABEL);
             } else {
                 normalized.add(label);
             }

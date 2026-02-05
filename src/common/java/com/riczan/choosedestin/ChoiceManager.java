@@ -1,10 +1,14 @@
 package com.riczan.choosedestin;
 
 import java.util.ArrayList;
+import java.util.ArrayDeque;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Deque;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.UUID;
 
 public final class ChoiceManager {
@@ -12,6 +16,7 @@ public final class ChoiceManager {
     private final MenuChoicePresenter menuPresenter;
     private final List<Choice> choices;
     private final Map<UUID, ActiveChoice> activeChoices = new HashMap<>();
+    private final Map<UUID, Deque<Choice>> choiceQueues = new HashMap<>();
 
     public ChoiceManager(GameAdapter adapter, List<Choice> choices) {
         this(adapter, choices, new MenuChoicePresenter(adapter));
@@ -30,7 +35,7 @@ public final class ChoiceManager {
     }
 
     public void startNewChoice(GamePlayer player) {
-        Choice choice = ChoiceSelector.pickRandom(choices, player.getId());
+        Choice choice = nextChoice(player);
         ActiveChoice activeChoice = new ActiveChoice(choice, adapter.getGameTimeSeconds());
         activeChoices.put(player.getId(), activeChoice);
         menuPresenter.open(player, choice);
@@ -74,5 +79,20 @@ public final class ChoiceManager {
             return "Select Option 1 or Option 2";
         }
         return prompt.replaceAll("(?i)\\s+or\\s+no\\s+bonus\\??$", "");
+    }
+
+    private Choice nextChoice(GamePlayer player) {
+        Deque<Choice> queue = choiceQueues.computeIfAbsent(player.getId(), key -> buildQueue(player));
+        if (queue.isEmpty()) {
+            queue.addAll(buildQueue(player));
+        }
+        return queue.pollFirst();
+    }
+
+    private Deque<Choice> buildQueue(GamePlayer player) {
+        List<Choice> shuffled = new ArrayList<>(choices);
+        long seed = player.getId().getMostSignificantBits() ^ player.getId().getLeastSignificantBits() ^ System.nanoTime();
+        Collections.shuffle(shuffled, new Random(seed));
+        return new ArrayDeque<>(shuffled);
     }
 }
