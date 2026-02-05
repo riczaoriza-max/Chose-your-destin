@@ -17,10 +17,10 @@ public final class FabricChoiceScreen extends Screen {
     private static final int PANEL_PADDING = 16;
     private static final int BUTTON_SPACING = 12;
     private static final int BUTTON_HEIGHT = 22;
-    private static final int PANEL_WIDTH = 320;
-    private static final int PANEL_HEIGHT = 160;
-    private static final int CHOICE_PANEL_WIDTH = 200;
-    private static final int CHOICE_PANEL_HEIGHT = 110;
+    private static final int PANEL_WIDTH = 420;
+    private static final int PANEL_HEIGHT = 210;
+    private static final int CHOICE_PANEL_WIDTH = 190;
+    private static final int CHOICE_PANEL_HEIGHT = 120;
     private static final int BLUE_PANEL_COLOR = 0xAA1E4FA3;
     private static final int ORANGE_PANEL_COLOR = 0xAAC45C12;
     private static final int BLUE_BUTTON_COLOR = 0xFF3C6FD9;
@@ -64,14 +64,14 @@ public final class FabricChoiceScreen extends Screen {
         int titleY = panelTop + PANEL_PADDING / 2;
         context.drawCenteredTextWithShadow(textRenderer, title, width / 2, titleY, 0xF5F5F5);
 
-        int promptY = panelTop + PANEL_PADDING + 16;
+        int promptY = panelTop + PANEL_PADDING + 18;
         for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(prompt), PANEL_WIDTH - PANEL_PADDING * 2)) {
             int lineWidth = textRenderer.getWidth(line);
             context.drawTextWithShadow(textRenderer, line, width / 2 - lineWidth / 2, promptY, 0xE0E0E0);
             promptY += textRenderer.fontHeight + 2;
         }
 
-        int choicePanelTop = panelTop + PANEL_PADDING + 48;
+        int choicePanelTop = panelTop + PANEL_PADDING + 68;
         int leftPanelLeft = panelLeft + PANEL_PADDING;
         int rightPanelLeft = panelRight - PANEL_PADDING - CHOICE_PANEL_WIDTH;
         int choicePanelBottom = choicePanelTop + CHOICE_PANEL_HEIGHT;
@@ -81,10 +81,18 @@ public final class FabricChoiceScreen extends Screen {
 
         int optionTextY = choicePanelTop + PANEL_PADDING;
         context.drawText(textRenderer, Text.literal("Opção 1"), leftPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
-        context.drawText(textRenderer, Text.literal(options.get(0)), leftPanelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 4, 0xE6E6E6, false);
+        int leftTextY = optionTextY + textRenderer.fontHeight + 4;
+        for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(options.get(0)), CHOICE_PANEL_WIDTH - PANEL_PADDING * 2)) {
+            context.drawText(textRenderer, line, leftPanelLeft + PANEL_PADDING, leftTextY, 0xE6E6E6, false);
+            leftTextY += textRenderer.fontHeight + 2;
+        }
 
         context.drawText(textRenderer, Text.literal("Opção 2"), rightPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
-        context.drawText(textRenderer, Text.literal(options.get(1)), rightPanelLeft + PANEL_PADDING, optionTextY + textRenderer.fontHeight + 4, 0xFFF1E0, false);
+        int rightTextY = optionTextY + textRenderer.fontHeight + 4;
+        for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(options.get(1)), CHOICE_PANEL_WIDTH - PANEL_PADDING * 2)) {
+            context.drawText(textRenderer, line, rightPanelLeft + PANEL_PADDING, rightTextY, 0xFFF1E0, false);
+            rightTextY += textRenderer.fontHeight + 2;
+        }
 
         int buttonWidth = (PANEL_WIDTH - PANEL_PADDING * 2 - BUTTON_SPACING) / 2;
         int buttonY = panelBottom - PANEL_PADDING - BUTTON_HEIGHT;

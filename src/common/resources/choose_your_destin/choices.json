@@ -4,7 +4,7 @@
   "choices": [
     {
       "id": "choice_001_jump",
-      "prompt": "Choice 1: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -14,14 +14,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_002_mine",
-      "prompt": "Choice 2: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -31,14 +34,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_003_sprint",
-      "prompt": "Choice 3: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -48,14 +54,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_004_vision",
-      "prompt": "Choice 4: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -65,14 +74,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_005_damage",
-      "prompt": "Choice 5: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -82,14 +94,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_006_regen",
-      "prompt": "Choice 6: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -99,14 +114,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_007_swim",
-      "prompt": "Choice 7: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -116,14 +134,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_008_build",
-      "prompt": "Choice 8: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -133,14 +154,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_009_knockback",
-      "prompt": "Choice 9: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -150,14 +174,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_010_luck",
-      "prompt": "Choice 10: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -167,14 +194,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_011_jump",
-      "prompt": "Choice 11: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -184,14 +214,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_012_mine",
-      "prompt": "Choice 12: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -201,14 +234,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_013_sprint",
-      "prompt": "Choice 13: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -218,14 +254,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_014_vision",
-      "prompt": "Choice 14: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -235,14 +274,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_015_damage",
-      "prompt": "Choice 15: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -252,14 +294,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_016_regen",
-      "prompt": "Choice 16: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -269,14 +314,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_017_swim",
-      "prompt": "Choice 17: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -286,14 +334,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_018_build",
-      "prompt": "Choice 18: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -303,14 +354,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_019_knockback",
-      "prompt": "Choice 19: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -320,14 +374,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_020_luck",
-      "prompt": "Choice 20: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -337,14 +394,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_021_jump",
-      "prompt": "Choice 21: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -354,14 +414,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_022_mine",
-      "prompt": "Choice 22: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -371,14 +434,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_023_sprint",
-      "prompt": "Choice 23: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -388,14 +454,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_024_vision",
-      "prompt": "Choice 24: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -405,14 +474,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_025_damage",
-      "prompt": "Choice 25: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -422,14 +494,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_026_regen",
-      "prompt": "Choice 26: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -439,14 +514,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_027_swim",
-      "prompt": "Choice 27: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -456,14 +534,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_028_build",
-      "prompt": "Choice 28: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -473,14 +554,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_029_knockback",
-      "prompt": "Choice 29: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -490,14 +574,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_030_luck",
-      "prompt": "Choice 30: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -507,14 +594,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_031_jump",
-      "prompt": "Choice 31: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -524,14 +614,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_032_mine",
-      "prompt": "Choice 32: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -541,14 +634,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_033_sprint",
-      "prompt": "Choice 33: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -558,14 +654,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_034_vision",
-      "prompt": "Choice 34: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -575,14 +674,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_035_damage",
-      "prompt": "Choice 35: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -592,14 +694,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_036_regen",
-      "prompt": "Choice 36: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -609,14 +714,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_037_swim",
-      "prompt": "Choice 37: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -626,14 +734,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_038_build",
-      "prompt": "Choice 38: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -643,14 +754,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_039_knockback",
-      "prompt": "Choice 39: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -660,14 +774,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_040_luck",
-      "prompt": "Choice 40: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -677,14 +794,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_041_jump",
-      "prompt": "Choice 41: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -694,14 +814,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_042_mine",
-      "prompt": "Choice 42: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -711,14 +834,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_043_sprint",
-      "prompt": "Choice 43: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -728,14 +854,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_044_vision",
-      "prompt": "Choice 44: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -745,14 +874,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_045_damage",
-      "prompt": "Choice 45: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -762,14 +894,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_046_regen",
-      "prompt": "Choice 46: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -779,14 +914,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_047_swim",
-      "prompt": "Choice 47: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -796,14 +934,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_048_build",
-      "prompt": "Choice 48: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -813,14 +954,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_049_knockback",
-      "prompt": "Choice 49: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -830,14 +974,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_050_luck",
-      "prompt": "Choice 50: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -847,14 +994,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_051_jump",
-      "prompt": "Choice 51: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -864,14 +1014,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_052_mine",
-      "prompt": "Choice 52: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -881,14 +1034,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_053_sprint",
-      "prompt": "Choice 53: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -898,14 +1054,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_054_vision",
-      "prompt": "Choice 54: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -915,14 +1074,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_055_damage",
-      "prompt": "Choice 55: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -932,14 +1094,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_056_regen",
-      "prompt": "Choice 56: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -949,14 +1114,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_057_swim",
-      "prompt": "Choice 57: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -966,14 +1134,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_058_build",
-      "prompt": "Choice 58: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -983,14 +1154,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_059_knockback",
-      "prompt": "Choice 59: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -1000,14 +1174,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_060_luck",
-      "prompt": "Choice 60: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -1017,14 +1194,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_061_jump",
-      "prompt": "Choice 61: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -1034,14 +1214,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_062_mine",
-      "prompt": "Choice 62: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -1051,14 +1234,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_063_sprint",
-      "prompt": "Choice 63: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -1068,14 +1254,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_064_vision",
-      "prompt": "Choice 64: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -1085,14 +1274,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_065_damage",
-      "prompt": "Choice 65: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -1102,14 +1294,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_066_regen",
-      "prompt": "Choice 66: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -1119,14 +1314,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_067_swim",
-      "prompt": "Choice 67: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -1136,14 +1334,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_068_build",
-      "prompt": "Choice 68: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -1153,14 +1354,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_069_knockback",
-      "prompt": "Choice 69: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -1170,14 +1374,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_070_luck",
-      "prompt": "Choice 70: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -1187,14 +1394,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_071_jump",
-      "prompt": "Choice 71: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -1204,14 +1414,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_072_mine",
-      "prompt": "Choice 72: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -1221,14 +1434,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_073_sprint",
-      "prompt": "Choice 73: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -1238,14 +1454,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_074_vision",
-      "prompt": "Choice 74: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -1255,14 +1474,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_075_damage",
-      "prompt": "Choice 75: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -1272,14 +1494,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_076_regen",
-      "prompt": "Choice 76: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -1289,14 +1514,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_077_swim",
-      "prompt": "Choice 77: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -1306,14 +1534,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_078_build",
-      "prompt": "Choice 78: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -1323,14 +1554,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_079_knockback",
-      "prompt": "Choice 79: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -1340,14 +1574,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_080_luck",
-      "prompt": "Choice 80: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -1357,14 +1594,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_081_jump",
-      "prompt": "Choice 81: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -1374,14 +1614,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_082_mine",
-      "prompt": "Choice 82: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -1391,14 +1634,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_083_sprint",
-      "prompt": "Choice 83: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -1408,14 +1654,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_084_vision",
-      "prompt": "Choice 84: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -1425,14 +1674,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_085_damage",
-      "prompt": "Choice 85: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -1442,14 +1694,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_086_regen",
-      "prompt": "Choice 86: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -1459,14 +1714,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_087_swim",
-      "prompt": "Choice 87: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -1476,14 +1734,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_088_build",
-      "prompt": "Choice 88: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -1493,14 +1754,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_089_knockback",
-      "prompt": "Choice 89: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -1510,14 +1774,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_090_luck",
-      "prompt": "Choice 90: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -1527,14 +1794,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_091_jump",
-      "prompt": "Choice 91: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -1544,14 +1814,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_092_mine",
-      "prompt": "Choice 92: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -1561,14 +1834,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_093_sprint",
-      "prompt": "Choice 93: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -1578,14 +1854,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_094_vision",
-      "prompt": "Choice 94: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -1595,14 +1874,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_095_damage",
-      "prompt": "Choice 95: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -1612,14 +1894,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_096_regen",
-      "prompt": "Choice 96: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -1629,14 +1914,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_097_swim",
-      "prompt": "Choice 97: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -1646,14 +1934,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_098_build",
-      "prompt": "Choice 98: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -1663,14 +1954,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_099_knockback",
-      "prompt": "Choice 99: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -1680,14 +1974,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_100_luck",
-      "prompt": "Choice 100: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -1697,14 +1994,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_101_jump",
-      "prompt": "Choice 101: Jump higher and take double fall damage OR No bonus?",
+      "prompt": "Preferes Jump higher and take double fall damage ou Sprint frenético (muito rápido) mas com fome voraz?",
       "options": [
         {
           "label": "Jump higher and take double fall damage",
@@ -1714,14 +2014,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Sprint frenético (muito rápido) mas com fome voraz",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_102_mine",
-      "prompt": "Choice 102: Mine 2x faster and get 30% fewer resource drops OR No bonus?",
+      "prompt": "Preferes Mine 2x faster and get 30% fewer resource drops ou Mineração mais lenta mas com sorte extra nos drops?",
       "options": [
         {
           "label": "Mine 2x faster and get 30% fewer resource drops",
@@ -1731,14 +2034,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração mais lenta mas com sorte extra nos drops",
+          "effects": [
+            "MINING_SPEED_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_103_sprint",
-      "prompt": "Choice 103: Move faster and get hungry 50% faster OR No bonus?",
+      "prompt": "Preferes Move faster and get hungry 50% faster ou Regeneração constante mas a andar em câmara lenta?",
       "options": [
         {
           "label": "Move faster and get hungry 50% faster",
@@ -1748,14 +2054,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Regeneração constante mas a andar em câmara lenta",
+          "effects": [
+            "REGENERATION_I",
+            "SLOWNESS_I"
+          ]
         }
       ]
     },
     {
       "id": "choice_104_vision",
-      "prompt": "Choice 104: Gain night vision and mobs spawn 30% more OR No bonus?",
+      "prompt": "Preferes Gain night vision and mobs spawn 30% more ou Graça de golfinho mas ficas sem ar mais rápido?",
       "options": [
         {
           "label": "Gain night vision and mobs spawn 30% more",
@@ -1765,14 +2074,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Graça de golfinho mas ficas sem ar mais rápido",
+          "effects": [
+            "DOLPHINS_GRACE",
+            "AIR_LOSS_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_105_damage",
-      "prompt": "Choice 105: Deal 25% more attack damage and have 20% less armor OR No bonus?",
+      "prompt": "Preferes Deal 25% more attack damage and have 20% less armor ou Resistência ao knockback mas ataques mais lentos?",
       "options": [
         {
           "label": "Deal 25% more attack damage and have 20% less armor",
@@ -1782,14 +2094,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Resistência ao knockback mas ataques mais lentos",
+          "effects": [
+            "KNOCKBACK_RESISTANCE",
+            "ATTACK_SPEED_MULTIPLIER_0_85X"
+          ]
         }
       ]
     },
     {
       "id": "choice_106_regen",
-      "prompt": "Choice 106: Gain regeneration and move slower OR No bonus?",
+      "prompt": "Preferes Gain regeneration and move slower ou Velocidade insana mas fome descontrolada?",
       "options": [
         {
           "label": "Gain regeneration and move slower",
@@ -1799,14 +2114,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Velocidade insana mas fome descontrolada",
+          "effects": [
+            "SPEED_II",
+            "HUNGER_DRAIN_MULTIPLIER_1_5X"
+          ]
         }
       ]
     },
     {
       "id": "choice_107_swim",
-      "prompt": "Choice 107: Gain dolphin's grace and lose air 50% faster OR No bonus?",
+      "prompt": "Preferes Gain dolphin's grace and lose air 50% faster ou Visão noturna mas monstros aparecem mais?",
       "options": [
         {
           "label": "Gain dolphin's grace and lose air 50% faster",
@@ -1816,14 +2134,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Visão noturna mas monstros aparecem mais",
+          "effects": [
+            "NIGHT_VISION",
+            "MOB_SPAWN_MULTIPLIER_1_3X"
+          ]
         }
       ]
     },
     {
       "id": "choice_108_build",
-      "prompt": "Choice 108: Place blocks 2x faster and mine 20% slower OR No bonus?",
+      "prompt": "Preferes Place blocks 2x faster and mine 20% slower ou Dano extra mas armadura reduzida?",
       "options": [
         {
           "label": "Place blocks 2x faster and mine 20% slower",
@@ -1833,14 +2154,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Dano extra mas armadura reduzida",
+          "effects": [
+            "DAMAGE_MULTIPLIER_1_25X",
+            "ARMOR_MULTIPLIER_0_8X"
+          ]
         }
       ]
     },
     {
       "id": "choice_109_knockback",
-      "prompt": "Choice 109: Gain knockback resistance and attack 15% slower OR No bonus?",
+      "prompt": "Preferes Gain knockback resistance and attack 15% slower ou Mineração turbo mas menos recursos?",
       "options": [
         {
           "label": "Gain knockback resistance and attack 15% slower",
@@ -1850,14 +2174,17 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Mineração turbo mas menos recursos",
+          "effects": [
+            "MINING_SPEED_2X",
+            "RESOURCE_DROP_MULTIPLIER_0_7X"
+          ]
         }
       ]
     },
     {
       "id": "choice_110_luck",
-      "prompt": "Choice 110: Gain 30% more loot and gain 20% less experience OR No bonus?",
+      "prompt": "Preferes Gain 30% more loot and gain 20% less experience ou Menos XP mas sorte extra nos drops?",
       "options": [
         {
           "label": "Gain 30% more loot and gain 20% less experience",
@@ -1867,8 +2194,11 @@
           ]
         },
         {
-          "label": "No bonus",
-          "effects": []
+          "label": "Menos XP mas sorte extra nos drops",
+          "effects": [
+            "XP_MULTIPLIER_0_8X",
+            "LOOT_MULTIPLIER_1_3X"
+          ]
         }
       ]
     }
