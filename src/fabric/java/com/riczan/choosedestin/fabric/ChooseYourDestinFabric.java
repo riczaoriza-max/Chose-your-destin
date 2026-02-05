@@ -18,9 +18,12 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.util.Identifier;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class ChooseYourDestinFabric implements ModInitializer {
     public static final Identifier SELECT_CHOICE_PACKET = new Identifier("choose_your_destin", "select_choice");
+    private static final Logger LOGGER = LoggerFactory.getLogger("choose_your_destin");
 
     private static ChoiceRuntime runtime;
     private static FabricGameAdapter adapter;
@@ -30,6 +33,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        LOGGER.info("We are alive (riczan mods)");
         ChoiceLootFunction.register();
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             adapter = new FabricGameAdapter(server);
