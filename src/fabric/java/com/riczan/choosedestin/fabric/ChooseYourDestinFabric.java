@@ -66,7 +66,7 @@ public final class ChooseYourDestinFabric implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.getPlayer();
-            player.sendMessage(Text.literal("Thanks for playing Chose your destin by riczan :)"), false);
+            player.sendMessage(Text.literal("[Chose Your Destin] Thanks for playing! Want more mods? Visit https://www.curseforge.com/members/riczan/projects"), false);
         });
 
         ServerLivingEntityEvents.ALLOW_DAMAGE.register((entity, source, amount) -> {
