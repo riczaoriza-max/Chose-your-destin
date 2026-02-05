@@ -65,8 +65,9 @@ public final class FabricChoiceScreen extends Screen {
         context.drawCenteredTextWithShadow(textRenderer, title, width / 2, titleY, 0xF5F5F5);
 
         int promptY = panelTop + PANEL_PADDING + 16;
-        for (Text line : textRenderer.wrapLines(Text.literal(prompt), PANEL_WIDTH - PANEL_PADDING * 2)) {
-            context.drawCenteredTextWithShadow(textRenderer, line, width / 2, promptY, 0xE0E0E0);
+        for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(prompt), PANEL_WIDTH - PANEL_PADDING * 2)) {
+            int lineWidth = textRenderer.getWidth(line);
+            context.drawTextWithShadow(textRenderer, line, width / 2 - lineWidth / 2, promptY, 0xE0E0E0);
             promptY += textRenderer.fontHeight + 2;
         }
 
