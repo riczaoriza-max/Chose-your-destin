@@ -89,8 +89,11 @@ public final class ChooseYourDestinyFabric implements ModInitializer {
                 double multiplier = adapter.getMultiplier(player, ChoiceEffect.FALL_DAMAGE_MULTIPLIER_2X, 1.0);
                 if (Double.compare(multiplier, 1.0) != 0) {
                     DAMAGE_REENTRY.set(true);
-                    entity.damage(source, (float) (amount * multiplier));
-                    DAMAGE_REENTRY.set(false);
+                    try {
+                        entity.damage(source, (float) (amount * multiplier));
+                    } finally {
+                        DAMAGE_REENTRY.set(false);
+                    }
                     return false;
                 }
             }

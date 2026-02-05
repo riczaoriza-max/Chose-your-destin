@@ -43,7 +43,7 @@ public final class ChoiceManager {
 
     public void selectOption(GamePlayer player, int optionIndex) {
         ActiveChoice activeChoice = activeChoices.get(player.getId());
-        if (activeChoice == null) {
+        if (activeChoice == null || activeChoice.getSelectedIndex() >= 0) {
             return;
         }
         if (optionIndex < 0 || optionIndex >= activeChoice.getChoice().getOptions().size()) {
@@ -53,6 +53,7 @@ public final class ChoiceManager {
         ChoiceOption option = activeChoice.getChoice().getOptions().get(optionIndex);
         adapter.clearEffects(player);
         adapter.applyEffects(player, option.getEffects());
+        menuPresenter.close(player);
     }
 
     public void tick() {
@@ -97,7 +98,11 @@ public final class ChoiceManager {
         if (queue.isEmpty()) {
             queue.addAll(buildQueue(player));
         }
-        return queue.pollFirst();
+        Choice next = queue.pollFirst();
+        if (next == null) {
+            throw new IllegalStateException("No choices available to start a new cycle");
+        }
+        return next;
     }
 
     private Deque<Choice> buildQueue(GamePlayer player) {

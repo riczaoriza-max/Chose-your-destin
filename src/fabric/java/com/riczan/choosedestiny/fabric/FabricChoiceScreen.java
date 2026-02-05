@@ -28,11 +28,13 @@ public final class FabricChoiceScreen extends Screen {
 
     private final String prompt;
     private final List<String> options;
+    private boolean submitted;
 
     public FabricChoiceScreen(String prompt, List<String> options) {
         super(Text.literal("Choose Your Destiny"));
         this.prompt = normalizePrompt(prompt);
         this.options = normalizeOptions(options);
+        this.submitted = false;
     }
 
     @Override
@@ -50,6 +52,19 @@ public final class FabricChoiceScreen extends Screen {
         addDrawableChild(ButtonWidget.builder(Text.literal("Pick 2: " + shortLabel(options.get(1))), button -> sendSelection(1))
             .dimensions(rightButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
+    }
+
+
+    @Override
+    public boolean shouldCloseOnEsc() {
+        return false;
+    }
+
+    @Override
+    public void close() {
+        if (submitted) {
+            super.close();
+        }
     }
 
     @Override
@@ -104,6 +119,10 @@ public final class FabricChoiceScreen extends Screen {
     }
 
     private void sendSelection(int index) {
+        if (submitted) {
+            return;
+        }
+        submitted = true;
         PacketByteBuf buf = new PacketByteBuf(Unpooled.buffer());
         buf.writeInt(index);
         ClientPlayNetworking.send(ChooseYourDestinyFabric.SELECT_CHOICE_PACKET, buf);
@@ -119,6 +138,9 @@ public final class FabricChoiceScreen extends Screen {
 
     private static List<String> normalizeOptions(List<String> options) {
         List<String> normalized = new ArrayList<>();
+        if (options == null) {
+            options = List.of();
+        }
         for (int i = 0; i < options.size(); i++) {
             String label = options.get(i);
             if (label == null) {

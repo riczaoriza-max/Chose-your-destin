@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public final class ChoiceRuntime {
+    private static final int FALLBACK_DURATION_SECONDS = 180;
     private final ChoiceManager manager;
 
     public ChoiceRuntime(ChoiceManager manager) {
@@ -11,25 +12,32 @@ public final class ChoiceRuntime {
     }
 
     public static ChoiceRuntime fromConfig(GameAdapter adapter, ChoiceConfig config) {
-        List<Choice> original = config.getChoices();
+        Objects.requireNonNull(adapter, "adapter");
+        Objects.requireNonNull(config, "config");
+
+        List<Choice> original = config.getChoices() == null ? List.of() : config.getChoices();
+        if (original.isEmpty()) {
+            throw new IllegalStateException("Choice config must define at least one choice");
+        }
+
+        int defaultDuration = config.getDurationSeconds() > 0 ? config.getDurationSeconds() : FALLBACK_DURATION_SECONDS;
         List<Choice> normalized = new java.util.ArrayList<>();
         for (Choice choice : original) {
-            List<ChoiceOption> options = normalizeOptions(choice.getOptions());
-            if (choice.getDurationSeconds() <= 0) {
-                normalized.add(new Choice(
-                    choice.getId(),
-                    choice.getPrompt(),
-                    options,
-                    config.getDurationSeconds()
-                ));
-            } else {
-                normalized.add(new Choice(
-                    choice.getId(),
-                    choice.getPrompt(),
-                    options,
-                    choice.getDurationSeconds()
-                ));
+            if (choice == null) {
+                continue;
             }
+            List<ChoiceOption> options = normalizeOptions(choice.getOptions());
+            int choiceDuration = choice.getDurationSeconds() > 0 ? choice.getDurationSeconds() : defaultDuration;
+            normalized.add(new Choice(
+                choice.getId(),
+                choice.getPrompt(),
+                options,
+                choiceDuration
+            ));
+        }
+
+        if (normalized.isEmpty()) {
+            throw new IllegalStateException("Choice config must include valid non-null choices");
         }
         return new ChoiceRuntime(new ChoiceManager(adapter, normalized));
     }
@@ -47,7 +55,9 @@ public final class ChoiceRuntime {
     }
 
     private static List<ChoiceOption> normalizeOptions(List<ChoiceOption> options) {
-        List<ChoiceOption> normalized = new java.util.ArrayList<>(options);
+        List<ChoiceOption> source = options == null ? List.of() : options;
+        List<ChoiceOption> normalized = new java.util.ArrayList<>(source);
+        normalized.removeIf(Objects::isNull);
         if (normalized.size() > 2) {
             normalized = normalized.subList(0, 2);
         }
