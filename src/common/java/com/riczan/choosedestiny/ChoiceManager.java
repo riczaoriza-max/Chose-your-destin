@@ -79,7 +79,7 @@ public final class ChoiceManager {
     }
 
     private String formatBossBarTitle(long remaining) {
-        return "✦ Escolha ativa ✦ §7(" + remaining + "s)";
+        return "✦ Active Choice ✦ §7(" + remaining + "s)";
     }
 
     private Choice nextChoice(GamePlayer player) {
