@@ -38,7 +38,7 @@ public final class ChooseYourDestinyFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        LOGGER.info("We are alive (riczan mods)");
+        LOGGER.info("We are alive (kotoritos mods)");
         ChoiceLootFunction.register();
         ServerLifecycleEvents.SERVER_STARTING.register(server -> {
             adapter = new FabricGameAdapter(server);
@@ -69,7 +69,7 @@ public final class ChooseYourDestinyFabric implements ModInitializer {
 
         ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
             ServerPlayerEntity player = handler.getPlayer();
-            String curseForgeUrl = "https://www.curseforge.com/members/riczan/projects";
+            String curseForgeUrl = "https://www.curseforge.com/members/kotoritos/projects";
             MutableText message = Text.literal("[Choose Your Destiny] Meu CurseForge: ")
                 .append(Text.literal(curseForgeUrl)
                     .setStyle(Style.EMPTY

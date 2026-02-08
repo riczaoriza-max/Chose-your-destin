@@ -1,6 +1,6 @@
 # Choose Your Destiny (v1)
 
-**Author:** riczan  
+**Author:** kotoritos  
 **License:** ARR (All Rights Reserved)  
 **Version:** v1  
 **Target compatibility:** Minecraft 1.20.1 (Fabric)
