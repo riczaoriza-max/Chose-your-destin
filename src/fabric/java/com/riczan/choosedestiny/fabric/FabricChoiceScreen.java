@@ -1,14 +1,16 @@
 package com.riczan.choosedestiny.fabric;
 
+import io.netty.buffer.Unpooled;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import io.netty.buffer.Unpooled;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.network.PacketByteBuf;
+import net.minecraft.text.OrderedText;
 import net.minecraft.text.Text;
 
 public final class FabricChoiceScreen extends Screen {
@@ -17,12 +19,26 @@ public final class FabricChoiceScreen extends Screen {
     private static final int PANEL_PADDING = 16;
     private static final int BUTTON_SPACING = 12;
     private static final int BUTTON_HEIGHT = 22;
-    private static final int PANEL_WIDTH = 420;
-    private static final int PANEL_HEIGHT = 210;
-    private static final int CHOICE_PANEL_WIDTH = 190;
-    private static final int CHOICE_PANEL_HEIGHT = 120;
-    private static final int BLUE_PANEL_COLOR = 0xAA1E4FA3;
-    private static final int ORANGE_PANEL_COLOR = 0xAAC45C12;
+    private static final int PANEL_WIDTH = 430;
+    private static final int PANEL_HEIGHT = 235;
+    private static final int CHOICE_PANEL_WIDTH = 194;
+    private static final int CHOICE_PANEL_HEIGHT = 122;
+    private static final int MAX_OPTION_LINES = 5;
+
+    private static final int FRAME_BORDER_OUTER = 0xAA000000;
+    private static final int FRAME_BORDER_INNER = 0x66FFFFFF;
+    private static final int PANEL_BACKGROUND_TOP = 0xD0181C2A;
+    private static final int PANEL_BACKGROUND_BOTTOM = 0xD010121B;
+    private static final int TITLE_COLOR = 0xFFF4F5FF;
+    private static final int SUBTITLE_COLOR = 0xFFB6BED2;
+
+    private static final int BLUE_PANEL_COLOR = 0xB025579E;
+    private static final int BLUE_PANEL_HOVER_COLOR = 0xCC2E68BA;
+    private static final int BLUE_PANEL_ACCENT = 0xFF74A9FF;
+    private static final int ORANGE_PANEL_COLOR = 0xB0AA5418;
+    private static final int ORANGE_PANEL_HOVER_COLOR = 0xCCCD6A22;
+    private static final int ORANGE_PANEL_ACCENT = 0xFFFFBF75;
+
     private static final int BLUE_BUTTON_COLOR = 0xFF3C6FD9;
     private static final int ORANGE_BUTTON_COLOR = 0xFFE48A1D;
 
@@ -46,14 +62,13 @@ public final class FabricChoiceScreen extends Screen {
         int leftButtonX = centerX - BUTTON_SPACING / 2 - buttonWidth;
         int rightButtonX = centerX + BUTTON_SPACING / 2;
 
-        addDrawableChild(ButtonWidget.builder(Text.literal("Pick 1: " + shortLabel(options.get(0))), button -> sendSelection(0))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Escolher 1: " + shortLabel(options.get(0))), button -> sendSelection(0))
             .dimensions(leftButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
-        addDrawableChild(ButtonWidget.builder(Text.literal("Pick 2: " + shortLabel(options.get(1))), button -> sendSelection(1))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Escolher 2: " + shortLabel(options.get(1))), button -> sendSelection(1))
             .dimensions(rightButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
     }
-
 
     @Override
     public boolean shouldCloseOnEsc() {
@@ -68,46 +83,37 @@ public final class FabricChoiceScreen extends Screen {
     }
 
     @Override
-    public void render(net.minecraft.client.gui.DrawContext context, int mouseX, int mouseY, float delta) {
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         renderBackground(context);
         int panelLeft = width / 2 - PANEL_WIDTH / 2;
         int panelTop = height / 2 - PANEL_HEIGHT / 2;
         int panelRight = panelLeft + PANEL_WIDTH;
         int panelBottom = panelTop + PANEL_HEIGHT;
-        context.fill(panelLeft, panelTop, panelRight, panelBottom, 0xB0000000);
+
+        drawFrame(context, panelLeft, panelTop, panelRight, panelBottom);
 
         int titleY = panelTop + PANEL_PADDING / 2;
-        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, titleY, 0xF5F5F5);
+        context.drawCenteredTextWithShadow(textRenderer, title, width / 2, titleY, TITLE_COLOR);
+        context.drawCenteredTextWithShadow(textRenderer, Text.literal("Selecione 1 opção para ativar por 3 minutos"), width / 2, titleY + 14, SUBTITLE_COLOR);
 
-        int promptY = panelTop + PANEL_PADDING + 18;
-        for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(prompt), PANEL_WIDTH - PANEL_PADDING * 2)) {
+        int promptY = panelTop + PANEL_PADDING + 30;
+        for (OrderedText line : textRenderer.wrapLines(Text.literal(prompt), PANEL_WIDTH - PANEL_PADDING * 2)) {
             int lineWidth = textRenderer.getWidth(line);
-            context.drawTextWithShadow(textRenderer, line, width / 2 - lineWidth / 2, promptY, 0xE0E0E0);
-            promptY += textRenderer.fontHeight + 2;
+            context.drawTextWithShadow(textRenderer, line, width / 2 - lineWidth / 2, promptY, 0xFFE2E4ED);
+            promptY += textRenderer.fontHeight + 1;
         }
 
-        int choicePanelTop = panelTop + PANEL_PADDING + 68;
+        int choicePanelTop = panelTop + PANEL_PADDING + 76;
         int leftPanelLeft = panelLeft + PANEL_PADDING;
         int rightPanelLeft = panelRight - PANEL_PADDING - CHOICE_PANEL_WIDTH;
-        int choicePanelBottom = choicePanelTop + CHOICE_PANEL_HEIGHT;
 
-        context.fill(leftPanelLeft, choicePanelTop, leftPanelLeft + CHOICE_PANEL_WIDTH, choicePanelBottom, BLUE_PANEL_COLOR);
-        context.fill(rightPanelLeft, choicePanelTop, rightPanelLeft + CHOICE_PANEL_WIDTH, choicePanelBottom, ORANGE_PANEL_COLOR);
+        boolean leftHovered = isInside(mouseX, mouseY, leftPanelLeft, choicePanelTop, CHOICE_PANEL_WIDTH, CHOICE_PANEL_HEIGHT);
+        boolean rightHovered = isInside(mouseX, mouseY, rightPanelLeft, choicePanelTop, CHOICE_PANEL_WIDTH, CHOICE_PANEL_HEIGHT);
 
-        int optionTextY = choicePanelTop + PANEL_PADDING;
-        context.drawText(textRenderer, Text.literal("Option 1"), leftPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
-        int leftTextY = optionTextY + textRenderer.fontHeight + 4;
-        for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(options.get(0)), CHOICE_PANEL_WIDTH - PANEL_PADDING * 2)) {
-            context.drawText(textRenderer, line, leftPanelLeft + PANEL_PADDING, leftTextY, 0xE6E6E6, false);
-            leftTextY += textRenderer.fontHeight + 2;
-        }
-
-        context.drawText(textRenderer, Text.literal("Option 2"), rightPanelLeft + PANEL_PADDING, optionTextY, 0xFFFFFF, false);
-        int rightTextY = optionTextY + textRenderer.fontHeight + 4;
-        for (net.minecraft.text.OrderedText line : textRenderer.wrapLines(Text.literal(options.get(1)), CHOICE_PANEL_WIDTH - PANEL_PADDING * 2)) {
-            context.drawText(textRenderer, line, rightPanelLeft + PANEL_PADDING, rightTextY, 0xFFF1E0, false);
-            rightTextY += textRenderer.fontHeight + 2;
-        }
+        drawChoiceCard(context, leftPanelLeft, choicePanelTop, CHOICE_PANEL_WIDTH, CHOICE_PANEL_HEIGHT, leftHovered,
+            BLUE_PANEL_COLOR, BLUE_PANEL_HOVER_COLOR, BLUE_PANEL_ACCENT, "Option 1", options.get(0));
+        drawChoiceCard(context, rightPanelLeft, choicePanelTop, CHOICE_PANEL_WIDTH, CHOICE_PANEL_HEIGHT, rightHovered,
+            ORANGE_PANEL_COLOR, ORANGE_PANEL_HOVER_COLOR, ORANGE_PANEL_ACCENT, "Option 2", options.get(1));
 
         int buttonWidth = (PANEL_WIDTH - PANEL_PADDING * 2 - BUTTON_SPACING) / 2;
         int buttonY = panelBottom - PANEL_PADDING - BUTTON_HEIGHT;
@@ -116,6 +122,57 @@ public final class FabricChoiceScreen extends Screen {
         context.fill(leftButtonX - 2, buttonY - 2, leftButtonX + buttonWidth + 2, buttonY + BUTTON_HEIGHT + 2, BLUE_BUTTON_COLOR);
         context.fill(rightButtonX - 2, buttonY - 2, rightButtonX + buttonWidth + 2, buttonY + BUTTON_HEIGHT + 2, ORANGE_BUTTON_COLOR);
         super.render(context, mouseX, mouseY, delta);
+    }
+
+    private void drawFrame(DrawContext context, int left, int top, int right, int bottom) {
+        context.fill(left - 1, top - 1, right + 1, bottom + 1, FRAME_BORDER_OUTER);
+        context.fill(left, top, right, bottom, PANEL_BACKGROUND_BOTTOM);
+        context.fillGradient(left + 1, top + 1, right - 1, bottom - 1, PANEL_BACKGROUND_TOP, PANEL_BACKGROUND_BOTTOM);
+        context.fill(left + 2, top + 2, right - 2, top + 3, FRAME_BORDER_INNER);
+    }
+
+    private void drawChoiceCard(
+        DrawContext context,
+        int left,
+        int top,
+        int width,
+        int height,
+        boolean hovered,
+        int baseColor,
+        int hoverColor,
+        int accentColor,
+        String optionTitle,
+        String optionValue
+    ) {
+        int right = left + width;
+        int bottom = top + height;
+        int bodyColor = hovered ? hoverColor : baseColor;
+        context.fill(left - 1, top - 1, right + 1, bottom + 1, 0x60000000);
+        context.fill(left, top, right, bottom, bodyColor);
+        context.fillGradient(left, top, right, top + 18, 0x55FFFFFF, 0x00FFFFFF);
+        context.fill(left, top, right, top + 2, accentColor);
+
+        context.drawTextWithShadow(textRenderer, Text.literal(optionTitle), left + PANEL_PADDING - 4, top + 6, 0xFFFFFFFF);
+        drawWrappedOption(context, optionValue, left + PANEL_PADDING - 4, top + 24, width - (PANEL_PADDING * 2) + 8);
+    }
+
+    private void drawWrappedOption(DrawContext context, String optionValue, int x, int y, int maxWidth) {
+        List<OrderedText> lines = textRenderer.wrapLines(Text.literal(optionValue), maxWidth);
+        int lineY = y;
+        for (int i = 0; i < lines.size() && i < MAX_OPTION_LINES; i++) {
+            OrderedText line = lines.get(i);
+            if (i == MAX_OPTION_LINES - 1 && lines.size() > MAX_OPTION_LINES) {
+                String trimmed = textRenderer.getTextHandler().trimToWidth(Text.literal(optionValue).getString(), maxWidth - 10, net.minecraft.text.Style.EMPTY);
+                context.drawText(textRenderer, Text.literal(trimmed + "..."), x, lineY, 0xFFEDEFF8, false);
+                return;
+            }
+            context.drawText(textRenderer, line, x, lineY, 0xFFEDEFF8, false);
+            lineY += textRenderer.fontHeight + 2;
+        }
+    }
+
+    private static boolean isInside(int mouseX, int mouseY, int left, int top, int width, int height) {
+        return mouseX >= left && mouseX <= left + width && mouseY >= top && mouseY <= top + height;
     }
 
     private void sendSelection(int index) {
@@ -164,9 +221,9 @@ public final class FabricChoiceScreen extends Screen {
         if (value == null || value.isBlank()) {
             return "Choice";
         }
-        if (value.length() <= 24) {
+        if (value.length() <= 20) {
             return value;
         }
-        return value.substring(0, 21) + "...";
+        return value.substring(0, 17) + "...";
     }
 }
