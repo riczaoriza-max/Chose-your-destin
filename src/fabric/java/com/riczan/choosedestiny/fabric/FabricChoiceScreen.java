@@ -62,10 +62,10 @@ public final class FabricChoiceScreen extends Screen {
         int leftButtonX = centerX - BUTTON_SPACING / 2 - buttonWidth;
         int rightButtonX = centerX + BUTTON_SPACING / 2;
 
-        addDrawableChild(ButtonWidget.builder(Text.literal("Escolher 1: " + shortLabel(options.get(0))), button -> sendSelection(0))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Choose 1: " + shortLabel(options.get(0))), button -> sendSelection(0))
             .dimensions(leftButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
-        addDrawableChild(ButtonWidget.builder(Text.literal("Escolher 2: " + shortLabel(options.get(1))), button -> sendSelection(1))
+        addDrawableChild(ButtonWidget.builder(Text.literal("Choose 2: " + shortLabel(options.get(1))), button -> sendSelection(1))
             .dimensions(rightButtonX, buttonY, buttonWidth, BUTTON_HEIGHT)
             .build());
     }
@@ -94,7 +94,7 @@ public final class FabricChoiceScreen extends Screen {
 
         int titleY = panelTop + PANEL_PADDING / 2;
         context.drawCenteredTextWithShadow(textRenderer, title, width / 2, titleY, TITLE_COLOR);
-        context.drawCenteredTextWithShadow(textRenderer, Text.literal("Selecione 1 opção para ativar por 3 minutos"), width / 2, titleY + 14, SUBTITLE_COLOR);
+        context.drawCenteredTextWithShadow(textRenderer, Text.literal("Select one option to activate for 3 minutes"), width / 2, titleY + 14, SUBTITLE_COLOR);
 
         int promptY = panelTop + PANEL_PADDING + 30;
         for (OrderedText line : textRenderer.wrapLines(Text.literal(prompt), PANEL_WIDTH - PANEL_PADDING * 2)) {
