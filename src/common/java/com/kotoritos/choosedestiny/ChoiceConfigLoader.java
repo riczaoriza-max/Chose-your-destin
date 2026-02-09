@@ -1,4 +1,4 @@
-package com.riczan.choosedestiny;
+package com.kotoritos.choosedestiny;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;

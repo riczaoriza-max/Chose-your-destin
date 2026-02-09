@@ -1,10 +1,10 @@
-package com.riczan.choosedestiny.fabric;
+package com.kotoritos.choosedestiny.fabric;
 
 import com.google.gson.Gson;
-import com.riczan.choosedestiny.ChoiceConfig;
-import com.riczan.choosedestiny.ChoiceConfigLoader;
-import com.riczan.choosedestiny.ChoiceEffect;
-import com.riczan.choosedestiny.ChoiceRuntime;
+import com.kotoritos.choosedestiny.ChoiceConfig;
+import com.kotoritos.choosedestiny.ChoiceConfigLoader;
+import com.kotoritos.choosedestiny.ChoiceEffect;
+import com.kotoritos.choosedestiny.ChoiceRuntime;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;

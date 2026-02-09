@@ -1,4 +1,4 @@
-package com.riczan.choosedestiny;
+package com.kotoritos.choosedestiny;
 
 public final class ActiveChoice {
     private final Choice choice;

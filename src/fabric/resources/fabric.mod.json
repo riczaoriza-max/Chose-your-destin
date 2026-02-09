@@ -13,10 +13,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.riczan.choosedestiny.fabric.ChooseYourDestinyFabric"
+      "com.kotoritos.choosedestiny.fabric.ChooseYourDestinyFabric"
     ],
     "client": [
-      "com.riczan.choosedestiny.fabric.ChooseYourDestinyFabricClient"
+      "com.kotoritos.choosedestiny.fabric.ChooseYourDestinyFabricClient"
     ]
   },
   "depends": {

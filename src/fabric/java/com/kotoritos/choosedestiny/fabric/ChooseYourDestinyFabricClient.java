@@ -1,4 +1,4 @@
-package com.riczan.choosedestiny.fabric;
+package com.kotoritos.choosedestiny.fabric;
 
 import java.util.ArrayList;
 import java.util.List;

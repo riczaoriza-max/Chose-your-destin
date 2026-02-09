@@ -1,9 +1,9 @@
-package com.riczan.choosedestiny.fabric;
+package com.kotoritos.choosedestiny.fabric;
 
-import com.riczan.choosedestiny.Choice;
-import com.riczan.choosedestiny.ChoiceEffect;
-import com.riczan.choosedestiny.GameAdapter;
-import com.riczan.choosedestiny.GamePlayer;
+import com.kotoritos.choosedestiny.Choice;
+import com.kotoritos.choosedestiny.ChoiceEffect;
+import com.kotoritos.choosedestiny.GameAdapter;
+import com.kotoritos.choosedestiny.GamePlayer;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.HashMap;

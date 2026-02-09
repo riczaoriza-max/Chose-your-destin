@@ -1,9 +1,9 @@
-package com.riczan.choosedestiny.fabric;
+package com.kotoritos.choosedestiny.fabric;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
-import com.riczan.choosedestiny.ChoiceEffect;
+import com.kotoritos.choosedestiny.ChoiceEffect;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;

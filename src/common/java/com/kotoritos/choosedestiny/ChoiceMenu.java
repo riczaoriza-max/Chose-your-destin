@@ -1,4 +1,4 @@
-package com.riczan.choosedestiny;
+package com.kotoritos.choosedestiny;
 
 public interface ChoiceMenu {
     void show(GamePlayer player, Choice choice);

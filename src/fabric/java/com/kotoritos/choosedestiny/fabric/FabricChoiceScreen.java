@@ -1,4 +1,4 @@
-package com.riczan.choosedestiny.fabric;
+package com.kotoritos.choosedestiny.fabric;
 
 import io.netty.buffer.Unpooled;
 import java.util.ArrayList;

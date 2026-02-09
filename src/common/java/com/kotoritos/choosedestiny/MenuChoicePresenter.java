@@ -1,4 +1,4 @@
-package com.riczan.choosedestiny;
+package com.kotoritos.choosedestiny;
 
 import java.util.Objects;
 
